@@ -1,0 +1,43 @@
+/* .wishlist{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.title{
+    margin-top: 10px ;
+    width: 100%;
+    height: 482px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://cdn.shopify.com/s/files/1/2278/7513/files/Category-Best_Sellers_2x_5514ab32-521f-4c4b-8674-720ab76d419a.jpg?v=1600790914');
+    background-position: center center;
+    background-size: cover;
+    opacity: 60%;
+    position: relative;
+} */
+.text{
+    font-family: FuturaPTBook;
+    font-size: 90px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: white;
+    font-size: 85px;
+    position: absolute;
+    left: 40%;
+    top: 47%;
+}
+.wish{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.tab{
+    width: 85%;
+    border-left: none;
+    border-right: none;
+}
+th{
+    text-align: left;
+}
