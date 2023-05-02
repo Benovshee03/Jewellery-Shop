@@ -80,6 +80,7 @@ a{
     justify-content: space-around;
     align-items: center;
     cursor: pointer;
+    gap: 5px;
 }
 .right{
     width: 14%;
@@ -537,19 +538,10 @@ ul button{
     color: white;
     border-bottom: 1px solid white;
 }
-.about__speciality{
-    width: 45%;
-    height: 76%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 20;
-    margin-left: 50%;
-}
+
 .infos{
     width: 100%;
-    height: 11%;
+    /* height: 11%; */
     font-weight: 400;
     font-size: 14px;
     border-bottom: 1px solid rgba(0,0,0,.1);
@@ -559,6 +551,7 @@ ul button{
     height: 40px;
     font-size: 26px;
     color: #34513f;
+
 }
 .shop__now{
     width: 92%;
@@ -575,7 +568,7 @@ ul button{
     background-size: cover;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     transition: all 0.5s ease-in-out;
 
@@ -586,7 +579,7 @@ ul button{
     background-size: cover;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     transition: all 0.5s ease-in-out;
 
@@ -597,7 +590,7 @@ ul button{
     background-size: cover;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     transition: all 0.5s ease-in-out;
 }
@@ -668,7 +661,7 @@ align-items: center;
     justify-content: space-between;
     position: relative;
 }
-.about__knows{
+.about__knows {
     width: 45%;
     height: 100%;
     display: flex;
@@ -699,6 +692,7 @@ align-items: center;
     color: white;
     border-bottom: 1px solid white;
 }
+/* blog */
 .about__specialities{
     width: 45%;
     height: 76%;
@@ -708,6 +702,22 @@ align-items: center;
     align-items: center;
     z-index: 20;
     /* margin-left: 50%; */
+}
+/* about */
+.about__speciality{
+    width: 45%;
+    height: 76%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5%;
+    justify-content: center;
+    align-items: center;
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center; */
+    z-index: 20;
+    margin-left: 50%;
 }
 
 

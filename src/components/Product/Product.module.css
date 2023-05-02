@@ -64,7 +64,7 @@
     height: 60px;
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
     justify-content: flex-start;
     gap: 10px;
     cursor: pointer;
@@ -106,4 +106,10 @@
     text-transform: uppercase;
     position: absolute;
     top: 85%;
+}
+.filterPart{
+    width: 25%;
+    height: 100vh;
+    background-color: #868686;
+    color: white;
 }

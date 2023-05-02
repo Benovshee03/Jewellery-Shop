@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState}from "react";
 import { Link } from "react-router-dom";
 import HomeCss from "../Home/Home.module.css";
 
@@ -8,11 +8,11 @@ import Meliora from "../svg/Meliora.svg";
 import Bag from "../svg/bag.svg";
 import Wishlist from "../svg/wishlist.svg";
 import shop from "../svg/store-solid.svg";
-import Banner1 from "../svg/baner1.jpeg";
-import Banner2 from "../svg/Banner3.jpeg";
-import Banner3 from "../svg/Banner4.jpeg";
-import Banner4 from "../svg/Baner4.jpeg";
-import Mel from "../svg/Meli.svg";
+// import Banner1 from "../svg/baner1.jpeg";
+// import Banner2 from "../svg/Banner3.jpeg";
+// import Banner3 from "../svg/Banner4.jpeg";
+// import Banner4 from "../svg/Baner4.jpeg";
+// import Mel from "../svg/Meli.svg";
 import Avatar from "../svg/avatar.png";
 import pro1 from "../svg/1.png";
 import pro2 from "../svg/2.png";
@@ -27,7 +27,8 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 export default function Home() {
-  // const [forWeb, setForWeb] = useState(true);
+
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -220,22 +221,22 @@ export default function Home() {
           </div>
           <ul className={HomeCss.about__speciality}>
             <li className={HomeCss.infos}>
-              <i class="fa-regular fa-ring fa-beat"></i>Bərk qızıl zərgərlik
+              <i  className = "fa-regular fa-ring"></i>Bərk qızıl zərgərlik
             </li>
             <li className={HomeCss.infos}>
-              <i class="fa-brands fa-sketch fa-beat"></i>Etik Mənbə
+              <i class="fa-brands fa-sketch "></i>Etik Mənbə
             </li>
             <li className={HomeCss.infos}>
-              <i class="fa-solid fa-globe fa-beat"></i>Davamlı Run
+              <i className="fa-solid fa-globe "></i>Davamlı Run
             </li>
             <li className={HomeCss.infos}>
-              <i class="fa-solid fa-money-bill fa-beat"></i>Münasib qiymətə
+              <i className="fa-solid fa-money-bill "></i>Münasib qiymətə
             </li>
             <li className={HomeCss.infos}>
-              <i class="fa-solid fa-venus fa-beat"></i>Qadınlar Üçün Qadınlar tərəfindən
+              <i className="fa-solid fa-venus "></i>Qadınlar Üçün Qadınlar tərəfindən
             </li>
             <li className={HomeCss.infos}>
-              <i class="fa-solid fa-city fa-beat"></i>Bakıda dizayn olunub
+              <i className="fa-solid fa-city "></i>Bakıda dizayn olunub
             </li>
           </ul>
         </div>
@@ -245,7 +246,7 @@ export default function Home() {
         <Carousel className={HomeCss.items} responsive={responsive}>
             <div className={HomeCss.box}>
               <div className={HomeCss.item}>
-                <img src={pro1} alt="image" className={HomeCss.image} />
+                <img src={pro1} alt="item" className={HomeCss.image} />
                 <Link to="/product" className={HomeCss.basket}>
                   Select options
                 </Link>
@@ -256,7 +257,7 @@ export default function Home() {
             </div>
             <div className={HomeCss.box}>
               <div className={HomeCss.item}>
-                <img src={pro2} alt="image" className={HomeCss.image} />
+                <img src={pro2} alt="item" className={HomeCss.image} />
                 <Link to="/product" className={HomeCss.basket}>
                   Select options
                 </Link>
@@ -267,7 +268,7 @@ export default function Home() {
             </div>
             <div className={HomeCss.box}>
               <div className={HomeCss.item}>
-                <img src={pro3} alt="image" className={HomeCss.image} />
+                <img src={pro3} alt="item" className={HomeCss.image} />
 
                 <Link to="/product" className={HomeCss.basket}>
                   Select options
@@ -279,7 +280,7 @@ export default function Home() {
             </div>
             <div className={HomeCss.box}>
               <div className={HomeCss.item}>
-                <img src={pro4} alt="image" className={HomeCss.image} />
+                <img src={pro4} alt="item" className={HomeCss.image} />
 
                 <Link to="/product" className={HomeCss.basket}>
                   Select options
@@ -291,7 +292,7 @@ export default function Home() {
             </div>
             <div className={HomeCss.box}>
               <div className={HomeCss.item}>
-                <img src={pro5} alt="image" className={HomeCss.image} />
+                <img src={pro5} alt="item" className={HomeCss.image} />
                 <Link to="/product" className={HomeCss.basket}>
                   Select options
                 </Link>
@@ -302,7 +303,7 @@ export default function Home() {
             </div>
             <div className={HomeCss.box}>
               <div className={HomeCss.item}>
-                <img src={pro6} alt="image" className={HomeCss.image} />
+                <img src={pro6} alt="item" className={HomeCss.image} />
                 <Link to="/product" className={HomeCss.basket}>
                   Select options
                 </Link>
@@ -313,7 +314,7 @@ export default function Home() {
             </div>
             <div className={HomeCss.box}>
               <div className={HomeCss.item}>
-                <img src={pro7} alt="image" className={HomeCss.image} />
+                <img src={pro7} alt="item" className={HomeCss.image} />
                 <Link to="/product" className={HomeCss.basket}>
                   Select options
                 </Link>
@@ -324,7 +325,7 @@ export default function Home() {
             </div>
             <div className={HomeCss.box}>
               <div className={HomeCss.item}>
-                <img src={pro8} alt="image" className={HomeCss.image} />
+                <img src={pro8} alt="item" className={HomeCss.image} />
                 <Link to="/product" className={HomeCss.basket}>
                   Select options
                 </Link>
@@ -343,13 +344,13 @@ export default function Home() {
         <div className={HomeCss.about__bottoms}>
           <ul className={HomeCss.about__specialities}>
             <li className={HomeCss.infos}>
-              <i class="fa-solid fa-arrow-right"></i>Sonrakı nə olursa olsun, görünüşünüzün qalan hissəsi üçün lövbər rolunu oynayacaq parça.
+              <i className="fa-solid fa-arrow-right"></i>Sonrakı nə olursa olsun, görünüşünüzün qalan hissəsi üçün lövbər rolunu oynayacaq parça.
             </li>
             <li className={HomeCss.infos}>
-              <i class="fa-solid fa-arrow-right"></i>Gözləri çəkmək və diqqəti cəlb etmək üçün kulon  əlavə edərək görünüşü tamamlayın.
+              <i className="fa-solid fa-arrow-right"></i>Gözləri çəkmək və diqqəti cəlb etmək üçün kulon  əlavə edərək görünüşü tamamlayın.
             </li>
             <li className={HomeCss.infos}>
-              <i class="fa-solid fa-arrow-right"></i>İstər qoşa zəncirli, istərsə də choker ilə təfərrüat əlavə edərək hər şeyi bir pillə qaldırın.
+              <i className="fa-solid fa-arrow-right"></i>İstər qoşa zəncirli, istərsə də choker ilə təfərrüat əlavə edərək hər şeyi bir pillə qaldırın.
             </li>
           </ul>
           <div className={HomeCss.about__knows}>

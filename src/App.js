@@ -3,6 +3,7 @@ import "./App.css";
 import Contact from "./components/Contact/Contact";
 import axios from "axios";
 import { useState, useEffect, createContext } from "react";
+import { Route, Routes } from "react-router-dom";
 
 import Home from "./components/Home/Home";
 import Product from "./components/Product/Product";
@@ -14,8 +15,10 @@ import Wishlist from "./components/Wishlist/Wishlist";
 import About from "./components/About/About";
 import ScrollToTop from "./components/ScrollToTop";
 import Login from "./components/Login/Login";
-import { Route, Routes } from "react-router-dom";
+import Register  from "./components/Register/Register";
 import Search from "./components/Search/Search";
+import Activation from "./components/Activation/Activation";
+import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 
 export const MyContext = createContext();
 
@@ -29,7 +32,7 @@ function App() {
 
   const getData = () => {
     axios
-      .get("http://localhost:3005/products")
+      .get("http://localhost:1337/products")
       .then((res) => {
         console.log(res.data)
         setProduct(res.data)
@@ -101,6 +104,9 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/activation" element={<Activation />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
       </MyContext.Provider>

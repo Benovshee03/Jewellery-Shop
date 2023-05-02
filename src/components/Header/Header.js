@@ -53,7 +53,7 @@ export default function Header() {
             </Link>
           </div>
           <Link to="/" className={HeadCss.mid}>
-            <img src={Meliora} alt="logo" width="350px" />
+            <img src={Meliora} alt="logo" width="350px" height="40px" />
           </Link>
           <div className={HeadCss.right}>
             <Link to="/wishlist">
