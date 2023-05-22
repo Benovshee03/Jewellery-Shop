@@ -30,7 +30,7 @@ export default function Activation() {
     };
   }, [seconds]);
   const resendOTP = () => {
-    setMinutes(2);
+    setMinutes(1);
     setSeconds(30);
   };
   return (

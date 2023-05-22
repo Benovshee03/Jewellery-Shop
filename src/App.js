@@ -19,81 +19,44 @@ import Register  from "./components/Register/Register";
 import Search from "./components/Search/Search";
 import Activation from "./components/Activation/Activation";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
+import ProductDetail from "./components/ProductDetail/ProductDetail";
 
 export const MyContext = createContext();
 
 function App() {
-  const [product, setProduct] = useState(null);
-  const [blog,setBlog] = useState(null)
-  const [cart, setCart] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
-  const [quantity, setQuantity] = useState(1)
-  
 
-  const getData = () => {
-    axios
-      .get("http://localhost:1337/products")
-      .then((res) => {
-        console.log(res.data)
-        setProduct(res.data)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const [product, setProduct] = useState([]);
+
+  const getData = async () => {
+    try {
+      let currentPage = 1;
+      let allItems = [];
+      while (true) {
+        const response = await axios.get(`http://91.107.207.100:81/api/products/list/?page=${currentPage}`);
+        const { results, next } = response.data;
+        allItems = [...allItems, ...results]; 
+        if (!next) {
+          break;
+        }
+        currentPage++;
+      }
+      setProduct(allItems);
+    } catch (error) {
+      console.error('Error fetching items:', error);
+    }
   };
-
   useEffect(() => {
     getData();
   }, []);
-  function addToCart(product) {
-    const existingProduct =product && product.find((p) => p.id === product.id);
-    if (existingProduct) {
-      const updatedCart = product.map((p) => {
-        if (p.id === product.id) {
-          return { ...p, quantity: existingProduct.quantity + 1 };
-        }
-        return p;
-      });
-      setCart(updatedCart);
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
-  }
-  
-  function incrementQuantity(productId) {
-    const updatedCart = product.map((p) => {
-      if (p.id === productId) {
-        return { ...p, quantity: p.quantity + 1 };
-      }
-      return p;
-    });
-    setCart(updatedCart);
-  }
-  
-  function decrementQuantity(productId) {
-    const existingProduct =product && product.find((p) => p.id === productId);
-    if (existingProduct && existingProduct.quantity > 1) {
-      const updatedCart = product.map((p) => {
-        if (p.id === productId) {
-          return { ...p, quantity: p.quantity - 1 };
-        }
-        return p;
-      });
-      setCart(updatedCart);
-    } else {
-      const updatedCart = product && product.filter((p) => p.id !== productId);
-      setCart(updatedCart);
-    }
-  }
-
   return (
     <div className="App">
-      <MyContext.Provider value={{ getData , product , blog , addToCart ,  incrementQuantity ,decrementQuantity}}>
+      <MyContext.Provider value={{ getData , product }}>
         <ScrollToTop />
         <Routes className="all">
           <Route path="/" exact element={<Home />} />
           <Route path="/stores" element={<Product />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/product/:roductId" element={<ProductDetail/>} />
           <Route path="/product/:category" element={<Product />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/shop" element={<Shop />} />

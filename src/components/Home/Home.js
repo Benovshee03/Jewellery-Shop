@@ -195,18 +195,18 @@ export default function Home() {
         </div>
       </section> */}
       <section className={HomeCss.shop__now} >
-        <div className={HomeCss.shop__f}>
+        <Link to="/product" className={HomeCss.shop__f}>
           <div className={HomeCss.shop__first}>Meliora x missoma</div>
           <Link to="/product" className={HomeCss.shop__second}>shop now</Link>  
-        </div>
-        <div className={HomeCss.shop__s}>
+        </Link>
+        <Link  to="/product" className={HomeCss.shop__s}>
           <div className={HomeCss.shop__first}>Meliora x Lucy Williams</div>
           <Link to="/product" className={HomeCss.shop__second}>shop now</Link> 
-        </div>
-        <div className={HomeCss.shop__t}>
+        </Link>
+        <Link  to="/product" className={HomeCss.shop__t}>
           <div className={HomeCss.shop__first}>Best of Collabs</div>
           <Link  to="/product" className={HomeCss.shop__second}>shop now</Link> 
-        </div>
+        </Link>
       </section>
       <section className={HomeCss.about__us}>
         <div className={HomeCss.about__top}>
