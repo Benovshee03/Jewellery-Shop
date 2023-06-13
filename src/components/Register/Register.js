@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect ,useContext} from "react";
+import { MyContext } from "../../App";
 import Header from "../Header/Header";
 import RegCss from "../Register/Register.module.css";
 import { Link } from "react-router-dom";
@@ -12,6 +13,7 @@ const pwdRegex =
   /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?~_+-=|\]).{8,32}$/;
 
 export default function Register() {
+  const {opacity} = useContext(MyContext)
   const [checked, setChecked] = useState(true);
   const [user, setUser] = useState("");
   const [validName, setvalidName] = useState(false);
@@ -61,7 +63,7 @@ export default function Register() {
   return (
     <>
       <Header />
-      <div className={RegCss.cover}>
+      <div className={RegCss.cover} style={{opacity}}>
         <div className={RegCss.mid}>
           <div className={RegCss.register}>
             <h2 className={RegCss.logtext}>Register</h2>

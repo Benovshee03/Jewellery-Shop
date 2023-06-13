@@ -49,14 +49,14 @@ export default function Footer() {
       </div>
       <div className={FooterCss.mid}>
         <div className={FooterCss.left}>
-          <div className={FooterCss.left__top}> get discount 20% off</div>
+          <div className={FooterCss.left__top}>  20% endirim əldə et </div>
           <div className={FooterCss.left__bottom}>
-            subscribe our newsletter and get discount 20% off
+            bülletenimizə abunə ol və 20% endirim əldə et
           </div>
         </div>
         <form onSubmit={handleSubmit} className={FooterCss.right} >
-          <input type="email" placeholder="your e-mail address" value={inputValue} onChange={handleInputChange}/>
-          <button type="submit"  >subscribe</button>
+          <input type="email" placeholder="sənin mail adresin" value={inputValue} onChange={handleInputChange}/>
+          <button type="submit"  >abunə ol</button>
         </form>
       </div>
       <div className={FooterCss.bottom}>
@@ -65,29 +65,33 @@ export default function Footer() {
           <div className={FooterCss.links}>
             <div className={FooterCss.adress}>Baku,Bakikhanov 37</div>
             <div>meliora0accessories@gmail.com</div>
+            <div></div>
+            <div></div>
           </div>
         </div>
         <div className={FooterCss.part}>
-          <div className={FooterCss.name}>company</div>
+          <div className={FooterCss.name}>şİrkət</div>
           <div className={FooterCss.links}>
-            <div><Link to='/about'>about us</Link></div>
-            <div>Business Account</div>
+            <div><Link to='/about'>haqqımızda</Link></div>
+            <div>Biznes hesabı</div>
+            <div></div>
+            <div></div>
           </div>
         </div>
         <div className={FooterCss.part}>
-          <div className={FooterCss.name}>help</div>
+          <div className={FooterCss.name}>kömək</div>
           <div className={FooterCss.links}>
-            <div>email us</div>
+            <div>email göndər</div>
             <div>help & faq</div>
-            <div>gifts cards</div>
+            <div>hədiyyə kartları</div>
           </div>
         </div>
         <div className={FooterCss.part}>
-          <div className={FooterCss.name}>quick links</div>
+          <div className={FooterCss.name}>linklər</div>
           <div className={FooterCss.links}>
-            <div>terms & conditions</div>
-            <div>return policy</div>
-            <div>we are hiring</div>
+            <div>qaydalar & şərtlər</div>
+            <div>qaytarma qaydaları</div>
+            <div>karyera</div>
           </div>
         </div>
         <div className={FooterCss.part}>

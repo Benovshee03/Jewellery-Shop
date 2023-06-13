@@ -1,39 +1,42 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
+import { MyContext } from "../../App";
 import Header from '../Header/Header'
 import BlogCss from '../Blog/Blog.module.css'
-// import { MyContext } from '../../App';
-import pro1 from "../svg/1.png";
 import axios from 'axios';
 
 export default function Blog() {
   const [blog,setBlog] = useState([])
-  const getBlog = () => {
-    axios 
-    .get("http://91.107.207.100:81/api/blogs/list/")
-    .then((res)=>{
-      console.log(res.data)
-      setBlog(res.data)
+  const {opacity} = useContext(MyContext)
+  const getData = async () => {
+    await axios.get(`http://91.107.207.100:81/api/blogs/list/`)
+    .then((res) => {
+      console.log(res.data);
+      setBlog(res.data) 
     })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
+        
+      // setBlog(blog)
+     .catch ((res) => {
+      console.error("Error fetching items:", res);
+    });
+  };
   useEffect(() => {
-    console.log(blog)
-    getBlog()
-  } , [])
+    getData()
+  })
+
   return (
     <>
     <Header/>
-    <section className={BlogCss.blog}>
+    <section className={BlogCss.blog} style={{opacity}}>
       <div className={BlogCss.trend}>
         <div className={BlogCss.text}>TREND HEKAYƏLƏR</div>
         <div className={BlogCss.bottom} >
           {blog && blog.map((e) => {
+          console.log(blog);
           return(
             <div className={BlogCss.box}  key={e.id}>
-              <img src={pro1} alt="blogs" />
+              <img src={e.image} alt="" />
               <div className={BlogCss.name}>{e.content}</div>
+              <div>{e.created_at}</div>
             </div>
             )
           })}

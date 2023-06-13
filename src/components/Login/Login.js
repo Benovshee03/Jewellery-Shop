@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import axios from "axios";
+import { MyContext } from "../../App";
 import Header from "../Header/Header";
 import LogCss from "../Login/Login.module.css";
 import TextField from "@mui/material/TextField";
@@ -8,11 +9,12 @@ import image from "../svg/8.png";
 import { Link } from "react-router-dom";
 export default function Login() {
 
+  const {opacity} = useContext(MyContext)
 
     return (
       <>
         <Header />
-        <section className={LogCss.log}>
+        <section className={LogCss.log} style={{opacity}}>
           <div className={LogCss.mid}>
             <div className={LogCss.login}>
               <h3 className={LogCss.logtext}>Login</h3>

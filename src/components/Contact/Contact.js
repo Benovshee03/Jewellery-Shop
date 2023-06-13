@@ -1,13 +1,15 @@
-import React from "react";
+import React ,{useContext} from "react";
 import { Link } from "react-router-dom";
+import { MyContext } from "../../App";
 import ConCss from "../Contact/Contact.module.css";
 import Header from "../Header/Header";
 import insta from "../svg/insta.jpg";
 export default function Contact() {
+  const {opacity} = useContext(MyContext)
   return (
     <>
       <Header />
-      <section className={ConCss.contact}>
+      <section className={ConCss.contact} style={{opacity}}>
         <div className={ConCss.top}>Contact Us</div>
         <div className={ConCss.bottom}>
           <div className={ConCss.left}>

@@ -1,3 +1,142 @@
-/* .head{
-    position: sticky;
-} */
+.about {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: FuturaPTBook;
+  margin-top: 30px;
+}
+.first {
+  width: 80%;
+  display: flex;
+  height: 720px;
+}
+.left {
+  width: 60%;
+  height: 720px;
+}
+.left img {
+    width: 90%;
+  height: 670px;
+}
+.right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.values {
+  font-size: 64px;
+  float: right;
+  margin-top: 80px;
+  margin-left: -35%;
+  text-align: center;
+}
+.box {
+  width: 480px;
+  height: 330px;
+  top: 400px;
+  left: 47%;
+  background: #f9f7f7;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box p {
+  width: 80%;
+}
+.second {
+  width: 80%;
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.part{
+    width: 90%;
+    height:650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.top{
+    width: 250px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.top1 img {
+  width: 250px;
+  height: 260px;
+  -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  -webkit-transform: scale(1);
+  /* transform: scale(1); */
+}
+.top2 img {
+  width: 250px;
+  height: 260px;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 100% 400%);
+  clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 100% 400%);
+}
+.top3 img {
+  width: 250px;
+  height: 260px;
+  -webkit-clip-path: polygon(20% 20%, 80% 20%, 100% 50%, 50% 100%, 0% 50%);
+  clip-path: polygon(20% 20%, 80% 20%, 100% 50%, 50% 100%, 0% 50%);
+}
+.top4 img {
+  width: 250px;
+  height: 260px;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+  clip-path: polygon(25% 0%, 75% 0%, 100% 60%, 50% 100%, 0% 60%);
+}
+.top5 img {
+  width: 240px;
+  height: 240px;
+  -webkit-clip-path: ellipse(70% 50% at 50% 50%);
+  clip-path: ellipse(60% 40% at 50% 50% );
+  
+}
+.top6 img {
+    width: 240px;
+    height: 240px;
+    -webkit-clip-path: ellipse(70% 50% at 50% 50%);
+    clip-path: ellipse(32% 50% at 50% 50% );
+  }
+  .part img:hover {
+    animation:move 0.4s ease-in-out;
+}
+@keyframes move{
+    0%{scale: 1;}
+    100%{scale: 1.01;}
+
+}
+.mid{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mid strong{
+    font-family: Good Girl;
+    font-size: 23px;
+    font-weight: 400;
+
+}
+.bottom{
+    width: 90%;
+    height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bottom p{
+    width: 90%;
+    height: 80%;
+    font-size: 15px;
+    font-weight: 300;
+}

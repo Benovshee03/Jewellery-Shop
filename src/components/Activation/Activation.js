@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
+import { MyContext } from "../../App";
 import { Link } from "react-router-dom";
 import ActCss from "../Activation/Activation.module.css";
 import Header from "../Header/Header";
@@ -9,7 +10,7 @@ export default function Activation() {
   const [otp, setOtp] = useState("");
   const [minutes, setMinutes] = useState(2);
   const [seconds, setSeconds] = useState(30);
-
+  const {opacity} = useContext(MyContext)
   useEffect(() => {
     const interval = setInterval(() => {
       if (seconds > 0) {
@@ -36,7 +37,7 @@ export default function Activation() {
   return (
     <>
       <Header />
-      <div className={ActCss.main}>
+      <div className={ActCss.main} style={{opacity}}>
         <img className={ActCss.icon1} src={icon1} alt="" />
         <img className={ActCss.icon2} src={icon2} alt="" />
         <div className={ActCss.box}>

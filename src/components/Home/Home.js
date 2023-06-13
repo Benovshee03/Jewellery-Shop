@@ -1,34 +1,21 @@
-import React,{useState}from "react";
+import React,{useState ,useContext}from "react";
 import { Link } from "react-router-dom";
 import HomeCss from "../Home/Home.module.css";
-
-
+import { MyContext } from "../../App";
+import times from "../svg/xmark-solid.svg";
 import Search from "../svg/search.svg";
 import Meliora from "../svg/Meliora.svg";
 import Bag from "../svg/bag.svg";
 import Wishlist from "../svg/wishlist.svg";
 import shop from "../svg/store-solid.svg";
-// import Banner1 from "../svg/baner1.jpeg";
-// import Banner2 from "../svg/Banner3.jpeg";
-// import Banner3 from "../svg/Banner4.jpeg";
-// import Banner4 from "../svg/Baner4.jpeg";
-// import Mel from "../svg/Meli.svg";
 import Avatar from "../svg/avatar.png";
-import pro1 from "../svg/1.png";
-import pro2 from "../svg/2.png";
-import pro3 from "../svg/3.png";
-import pro4 from "../svg/4.png";
-import pro5 from "../svg/5.png"
-import pro6 from "../svg/6.png";
-import pro7 from "../svg/7.png";
-import pro8 from "../svg/8.png";
-
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 export default function Home() {
-
-
+  const { searchProducts ,handleFilter ,opacity ,product} = useContext(MyContext);
+  const { searchText } = useContext(MyContext);
+  const [isOpen, setIsOpen] = useState(true);
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -47,30 +34,31 @@ export default function Home() {
     },
   };
   return (
-    <div className={HomeCss.home}>
-      <section className={HomeCss.first}>
+    <>
+    <div className={isOpen ? HomeCss.home : HomeCss.home__opacity}>
+      <section className={HomeCss.first} >
         <div className={HomeCss.header}>
           <div className={HomeCss.top}>
             <div className={HomeCss.text}>Welcome to Handmade Shop</div>
             <div className={HomeCss.login__part}>
               <Link to="/blog">Blog</Link>
               <div className={HomeCss.line}></div>
-              <Link to="/about">About</Link>
+              <Link to="/about">Haqqımızda</Link>
               <div className={HomeCss.line}></div>
-              <Link to="/contact">Contact</Link>
+              <Link to="/contact">Əlaqə</Link>
               <div className={HomeCss.line}></div>
-              <Link to="/login">Login</Link>
+              <Link to="/login">Daxil ol</Link>
             </div>
           </div>
           <div className={HomeCss.bottom}>
             <div className={HomeCss.left}>
               <Link to="/product">
                 <img src={shop} alt="menu_bar" width="20px" />
-                <span className={HomeCss.names}>Shop</span>
+                <span className={HomeCss.names}>Məhsullar</span>
               </Link>
-              <Link to="/search">
+              <Link onClick={() => setIsOpen(false)}>
                 <img src={Search} alt="search" width="20px" />
-                <span className={HomeCss.names}>Search</span>
+                <span className={HomeCss.names}>Axtar</span>
               </Link>
             </div>
             <div className={HomeCss.mid}>
@@ -79,12 +67,12 @@ export default function Home() {
             <div className={HomeCss.right}>
               <Link to="/wishlist">
                 <img src={Wishlist} alt="wishlist" width="20px" />
-                <span className={HomeCss.names}>Wishlist</span>
+                <span className={HomeCss.names}>Favorİlər</span>
               </Link>
               <Link to="/cart">
                 <img src={Bag} alt="bag" width="20px" />
                 <span className={HomeCss.names}>
-                  Cart <span>(0)</span>
+                  Səbət <span>(0)</span>
                 </span>
               </Link>
             </div>
@@ -96,11 +84,11 @@ export default function Home() {
                 alt="text"
               />
             </div>
-            <div className={HomeCss.spring}>Spring Summer 2023</div>
+            <div className={HomeCss.spring}>Yaz Yay 2023</div>
           </div>
         </div>
       </section>
-      <section className={HomeCss.second}>
+      <section className={HomeCss.second} style={{opacity}}>
         <nav>
           <ul>
             <button>x</button>
@@ -122,79 +110,7 @@ export default function Home() {
           </ul>
         </nav>
       </section>
-      {/* <section className={HomeCss.third}>
-        <div className={HomeCss.promo}>
-          <div className={HomeCss.promo__top}>
-            <div className={HomeCss.promo__top__left}>
-              <div className={HomeCss.style}>
-                Mood board Handmade <br /> Style Destination
-              </div>
-              <div className={HomeCss.style__image}>
-                <p>new arrival</p> <img src={Banner1} alt="ring" />
-              </div>
-              <div className={HomeCss.style__last}>
-                <div className={HomeCss.last__text}>
-                  Rubies have a quality known as pleochroism, which is the
-                  appear in here.
-                </div>
-                <Link to="/product" className={HomeCss.shop__now}>
-                  <button>shop now</button>
-                </Link>
-              </div>
-            </div>
-            <div className={HomeCss.promo__top__right}>
-              <div className={HomeCss.brand__image}>
-                <p>50% off</p>
-                <img src={Banner2} alt="ring" />
-              </div>
-              <div className={HomeCss.style__last}>
-                <div className={HomeCss.last__text}>
-                  Rubies have a quality known as pleochroism, which is the
-                  appear in here.
-                </div>
-                <Link to="/product" className={HomeCss.shop__now}>
-                  <button>shop now</button>
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className={HomeCss.promo__bottom}>
-            <div className={HomeCss.bottom__left}>
-              <div className={HomeCss.brand__image}>
-                <img src={Banner3} alt="ring" height="750px" />
-              </div>
-              <div className={HomeCss.style__last}>
-                <div className={HomeCss.last__text}>
-                  Rubies have a quality known as pleochroism, which is the
-                  appear in here.
-                </div>
-                <Link to="/product" className={HomeCss.shop__now}>
-                  <button>shop now</button>
-                </Link>
-              </div>
-            </div>
-            <div className={HomeCss.bottom__right}>
-              <div className={HomeCss.style}>
-                <img src={Mel} alt="meliora" />
-              </div>
-              <div className={HomeCss.style__image}>
-                new arrival
-                <img src={Banner4} alt="ring" />{" "}
-              </div>
-              <div className={HomeCss.style__last}>
-                <div className={HomeCss.last__text}>
-                  Rubies have a quality known as pleochroism, which is the
-                  appear in here.
-                </div>
-                <Link to="/product" className={HomeCss.shop__now}>
-                  <button>shop now</button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      <section className={HomeCss.shop__now} >
+      <section className={HomeCss.shop__now} style={{opacity}}>
         <Link to="/product" className={HomeCss.shop__f}>
           <div className={HomeCss.shop__first}>Meliora x missoma</div>
           <Link to="/product" className={HomeCss.shop__second}>shop now</Link>  
@@ -208,7 +124,7 @@ export default function Home() {
           <Link  to="/product" className={HomeCss.shop__second}>shop now</Link> 
         </Link>
       </section>
-      <section className={HomeCss.about__us}>
+      <section className={HomeCss.about__us} style={{opacity}}>
         <div className={HomeCss.about__top}>
           {" "}
           <h3>Heyrətamiz, gözəl</h3>
@@ -241,102 +157,28 @@ export default function Home() {
           </ul>
         </div>
       </section>
-      <section className={HomeCss.recommend}>
+      <section className={HomeCss.recommend} style={{opacity}}>
         <div className={HomeCss.recommend__text}>Tövsiyə Olunanlar</div>
         <Carousel className={HomeCss.items} responsive={responsive}>
+          {product && product.slice(0,15).map((e) => {
+          return(
             <div className={HomeCss.box}>
-              <div className={HomeCss.item}>
-                <img src={pro1} alt="item" className={HomeCss.image} />
-                <Link to="/product" className={HomeCss.basket}>
-                  Select options
-                </Link>
-                <div className={HomeCss.description}>
-                Rainbow Bright Tennis Qolbağı
-                </div>
+            <div className={HomeCss.item}>
+              <img src={"http://91.107.207.100:81" + e.images[0].image_url} alt="item" className={HomeCss.image} />
+              <Link to="/product" className={HomeCss.basket}>
+                Select options
+              </Link>
+              <div className={HomeCss.description}>
+              {e.name}
               </div>
             </div>
-            <div className={HomeCss.box}>
-              <div className={HomeCss.item}>
-                <img src={pro2} alt="item" className={HomeCss.image} />
-                <Link to="/product" className={HomeCss.basket}>
-                  Select options
-                </Link>
-                <div className={HomeCss.description}>
-                İncə sallanan brilyant muncuq zəncirli boyunbağı
-                </div>
-              </div>
-            </div>
-            <div className={HomeCss.box}>
-              <div className={HomeCss.item}>
-                <img src={pro3} alt="item" className={HomeCss.image} />
+          </div>
+            )
+          })}
 
-                <Link to="/product" className={HomeCss.basket}>
-                  Select options
-                </Link>
-                <div className={HomeCss.description}>
-                  Cotton Candy Damla Sırğalar
-                </div>
-              </div>
-            </div>
-            <div className={HomeCss.box}>
-              <div className={HomeCss.item}>
-                <img src={pro4} alt="item" className={HomeCss.image} />
-
-                <Link to="/product" className={HomeCss.basket}>
-                  Select options
-                </Link>
-                <div className={HomeCss.description}>
-                Pink Power Açıq Dairə Üzük
-                </div>
-              </div>
-            </div>
-            <div className={HomeCss.box}>
-              <div className={HomeCss.item}>
-                <img src={pro5} alt="item" className={HomeCss.image} />
-                <Link to="/product" className={HomeCss.basket}>
-                  Select options
-                </Link>
-                <div className={HomeCss.description}>
-                  Teeny Dangling Brilyant Muncuq Zəncirli Boyunbağı
-                </div>
-              </div>
-            </div>
-            <div className={HomeCss.box}>
-              <div className={HomeCss.item}>
-                <img src={pro6} alt="item" className={HomeCss.image} />
-                <Link to="/product" className={HomeCss.basket}>
-                  Select options
-                </Link>
-                <div className={HomeCss.description}>
-                  Teeny Dangling Brilyant Muncuq Zəncirli Boyunbağı
-                </div>
-              </div>
-            </div>
-            <div className={HomeCss.box}>
-              <div className={HomeCss.item}>
-                <img src={pro7} alt="item" className={HomeCss.image} />
-                <Link to="/product" className={HomeCss.basket}>
-                  Select options
-                </Link>
-                <div className={HomeCss.description}>
-                  Teeny Dangling Diamond Bead Chain Necklace
-                </div>
-              </div>
-            </div>
-            <div className={HomeCss.box}>
-              <div className={HomeCss.item}>
-                <img src={pro8} alt="item" className={HomeCss.image} />
-                <Link to="/product" className={HomeCss.basket}>
-                  Select options
-                </Link>
-                <div className={HomeCss.description}>
-                  Teeny Dangling Brilyant Muncuq Zəncirli Boyunbağı
-                </div>
-              </div>
-            </div>
         </Carousel>
       </section>
-      <section className={HomeCss.blog}>
+      <section className={HomeCss.blog} style={{opacity}}>
         <div className={HomeCss.about__tops}>
           <h3>Lucy Williams ilə</h3>
           <h3> gümüşü necə geyinmək olar </h3>
@@ -362,7 +204,7 @@ Orijinal Meliora ilhamının özü olan Lucy ilə kolleksiyanın arxasında dura
           </div>
         </div>
       </section>
-      <section className={HomeCss.fourth}>
+      <section className={HomeCss.fourth} style={{opacity}}>
         <div className={HomeCss.service}>
           <div className={HomeCss.avatar}>
             <img src={Avatar} alt="avatar" />
@@ -376,7 +218,63 @@ Orijinal Meliora ilhamının özü olan Lucy ilə kolleksiyanın arxasında dura
           </div>
         </div>
       </section>
-
     </div>
+    <section className={isOpen ? HomeCss.searchPart : HomeCss.search__part__close} style={{opacity}}>
+        <div className={HomeCss.search__top}>
+          <div className={HomeCss.close}>
+            <div onClick={() => setIsOpen(true)}>Close</div>
+            <div className={HomeCss.times}>
+              <img src={times} alt="times" onClick={() => setIsOpen(true)} />
+            </div>
+          </div>
+          <div className={HomeCss.input}>
+            <div>
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                className={HomeCss.search__head}
+                type="text"
+                placeholder="Məhsul, rəng və kategoriya axtar"
+                onChange={handleFilter }
+              />
+            </div>
+          </div>
+        </div>
+        <div className={HomeCss.search__bottom}>
+          <div className={HomeCss.bottom__first}>
+            <div className={HomeCss.top__collections}>Top Məhsullar</div>
+            <div className={HomeCss.top__right}>
+              <div className={HomeCss.best}>Əla təkliflər</div>
+              <Link to="/product" className={HomeCss.all}>
+                Hamısına bax
+              </Link>
+            </div>
+          </div>
+          <div className={HomeCss.bottom__second}>
+                <div  className={HomeCss.collect}>
+                {searchText && searchText.map((e) => {
+              return (
+                  <p className={HomeCss.filtered__text} key={e.id}>{e.name}</p>)
+                })}
+                </div>
+                <div className={HomeCss.boxes}>
+            {searchProducts &&
+              searchProducts.slice(0,4).map((e) => {
+                return (
+                    <Link key={e.id}  to="/product" className={HomeCss.item__search}>
+                      <img
+                        src={e.images.length > 0 ? "http://91.107.207.100:81" + e.images[0].image_url : "" }
+                        alt="backgroundImage"
+                        className={HomeCss.hovered__image}
+                      />
+                      <div className={HomeCss.description}>{e.name}</div>
+                      <div className={HomeCss.price}>$5{e.price}</div>
+                    </Link>
+                );
+              })}
+          </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

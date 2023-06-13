@@ -41,3 +41,33 @@
 th{
     text-align: left;
 }
+.empty{
+    width: 100%;
+    height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.empty img{
+    width: 450px;
+    height: 350px;
+    opacity: 0.7;
+}
+.empty p{
+    font-family: FuturaPTBook;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #34513f;
+    text-transform: uppercase;
+    font-size: 16px;
+    position: absolute;
+    top: 87%;
+}
+.add{
+    width: 95px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+}

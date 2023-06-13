@@ -15,7 +15,7 @@ import Wishlist from "./components/Wishlist/Wishlist";
 import About from "./components/About/About";
 import ScrollToTop from "./components/ScrollToTop";
 import Login from "./components/Login/Login";
-import Register  from "./components/Register/Register";
+import Register from "./components/Register/Register";
 import Search from "./components/Search/Search";
 import Activation from "./components/Activation/Activation";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
@@ -24,39 +24,111 @@ import ProductDetail from "./components/ProductDetail/ProductDetail";
 export const MyContext = createContext();
 
 function App() {
-
   const [product, setProduct] = useState([]);
-
+  const [productDetail, setProductDetail] = useState([]);
+  const [searchProducts, setSearchProducts] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [cartItems, setCartItems] = useState([]);
+  const [wishlist,setWishlist] = useState([])
+  const [opacity, setOpacity] = useState(1);
+// butun pagelerin opacity si ucun
+  // const setOpacit = () => {
+  //   setOpacity(0.5); 
+  // };
+  // const [filteredData,setFilteredData] = useState([])
   const getData = async () => {
     try {
       let currentPage = 1;
       let allItems = [];
       while (true) {
-        const response = await axios.get(`http://91.107.207.100:81/api/products/list/?page=${currentPage}`);
+        const response = await axios.get(
+          `http://91.107.207.100:81/api/products/list/?page=${currentPage}`
+        );
+        // console.log(response.data.results.images);
         const { results, next } = response.data;
-        allItems = [...allItems, ...results]; 
+        allItems = [...allItems, ...results];
         if (!next) {
           break;
         }
         currentPage++;
       }
       setProduct(allItems);
+      setSearchProducts(allItems);
+      setSearchText(allItems);
+      setProductDetail(allItems);
+      setCartItems(allItems)
     } catch (error) {
-      console.error('Error fetching items:', error);
+      console.error("Error fetching items:", error);
     }
   };
+
+  // Sebete elave etmek 
+  const addToCart = (item) => {
+    setCartItems((prevCartItems) => [...prevCartItems, item]);
+  };
+  const deleteFromCart = (itemId) => {
+    setCartItems((prevCart) => prevCart.filter((item) => item.id !== itemId));
+  };
+  
+  //wishliste elave etmek
+  const addToWishlist = (item) =>{
+    setWishlist((prevWishlist) => [...prevWishlist , item])
+  }
+  const deleteFromWishlist = (itemId) =>{
+    setWishlist((prevWishlist) => prevWishlist.filter((item) => item.id != itemId))
+  }
+  // Search hissesindekileri filterlemek............................................
+  const filterText = (searchText, filter) => {
+    return (
+      searchText &&
+      searchText.filter((value) =>
+        value.name.toLowerCase().includes(filter.toLowerCase())
+      )
+    );
+  };
+
+  const handleFilter = (e) => {
+    const filter = e.target.value.trim();
+    const filteredText = filterText(searchText, filter);
+    if(filter === ""){
+      setSearchText([])
+    }else{
+      setSearchText(filteredText)
+    }
+    console.log( searchText);
+  };
+
+
   useEffect(() => {
     getData();
-  }, []);
+  }, [product]);
+
+
+
   return (
     <div className="App">
-      <MyContext.Provider value={{ getData , product }}>
+      <MyContext.Provider
+        value={{ getData, 
+          product, 
+          searchProducts, 
+          searchText, 
+          handleFilter ,
+          productDetail , 
+          wishlist, 
+          deleteFromWishlist , 
+          addToWishlist , 
+          cartItems, 
+          addToCart , 
+          deleteFromCart , 
+          setOpacity , 
+          opacity}}
+      >
         <ScrollToTop />
         <Routes className="all">
           <Route path="/" exact element={<Home />} />
           <Route path="/stores" element={<Product />} />
           <Route path="/product" element={<Product />} />
-          <Route path="/product/:roductId" element={<ProductDetail/>} />
+          <Route path="/product/:productId" element={<ProductDetail />} />
           <Route path="/product/:category" element={<Product />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/shop" element={<Shop />} />
@@ -78,150 +150,3 @@ function App() {
 }
 
 export default App;
-
-// function App() {
-//   const [page, setPage] = useState({ start: 0, finish: 4 })
-//   const [quantity, setQuantity] = useState(1)
-//   const [constant, setConstant] = useState([])
-//   const [main, setMain] = useState(null)
-//   const [products, setProducts] = useState(null)
-//   const [productsId, setProductsId] = useState([])
-//   const [favorite,setFavorite]=useState([])
-//   const [Searchbar, setSearchbar] = useState(false)
-//   const [SearchbarAnimation, setSearchbarAnimation] = useState("open")
-//   const[blogs,setBlogs]=useState(null)
-//   const [cardcount, setCartcount] = useState(constant.filter(item => item.count > 0).reduce((total) =>  total = total + 1 , 0 ))
-//   const getinfo = async () => {
-//     let res = await axios.get("http://localhost:1337/products")
-//     let resp = await axios.get("http://localhost:1337/blogs")
-//     setMain(res.data)
-//     setProducts(res.data)
-//     setConstant(res.data)
-//     setBlogs(resp.data)
-//   }
-//   useEffect(() => {
-//     getinfo()
-//   }, [])
-//   // const basket = (id) => {
-//   //   products && products.map((num) => {
-//   //     if (num.id === id) {
-//   //       if (num.count) { num.count++
-//   //         console.log(num.count);
-//   //        }
-//   //       else {
-//   //         num.count = 1
-//   //         setProductsId(productsId.concat(num))
-//   //         // console.log(productsId);
-//   //       }
-//   //     }
-//   //   })
-//   //   setCart(constant.filter(item => item.count > 0))
-//   //   setCartcount(constant.filter(item => item.count > 0).reduce((total) =>  total = total + 1 , 0 ))
-//   // }
-//   const basket = (id) => {
-//     products && products.map((number) => {
-//        if (number.id === id) {
-//          if (number.count && number.count<99) { number.count++ }
-//          else if (number.count==99){}
-//          else {
-//            number.count = 1
-//          }
-//        }
-//        setProductsId(constant.filter(item => item.count > 0))
-//        setCartcount(constant.filter(item => item.count > 0).reduce((total) => total = total + 1, 0))
-//        console.log(productsId);
-//      })
-//    }
-//    const basketminus = (id) => {
-//     products && products.map((number) => {
-//        if (number.id === id) {
-//          if (number.count>1) { number.count--}
-//        }
-//        setProductsId(constant.filter(item => item.count > 0))
-//        setCartcount(constant.filter(item => item.count > 0).reduce((total) => total = total + 1, 0))
-//      })
-//    }
-//    const basketremove = (id) => {
-//     products && products.map((number) => {
-//       if (number.id === id) {
-//         number.count = false
-//       }
-//       setProductsId(constant.filter(item => item.count > 0))
-//       setCartcount(constant.filter(item => item.count > 0).reduce((total) => total = total + 1, 0))
-//     })
-//   }
-//    const pageChange = (e) => {
-//     var first = page.start
-//     var second = page.finish
-//     console.log(e.target.className)
-//     if (e.target.className == "fa-solid fa-chevron-left") {
-//       console.log(first)
-//       if (first == 0) {
-//       }
-//       else if(second==products.length) { setPage({ start: first - 4, finish:first }) }
-//       else { setPage({ start: first - 4, finish: second - 4 }) }
-//     }
-//     else if (e.target.className == "fa-solid fa-chevron-right") {
-//       if (second + 4 < products.length) {
-//         setPage({ start: first + 4, finish: second + 4 })
-//       }
-//       else if (first + 4 >= products.length) { }
-//       else if (second + 4 >= products.length) {
-//         setPage({ start: first + 4, finish: products.length })
-//       }
-//     }
-//    console.log(page);
-//   }
-//   const favoritebutton = (id) => {
-//     main && main.map((number) => {
-//       if (number.id === id) {
-//         if (number.fave) {
-//           number.fave = false
-//         }
-//         else {
-//           number.fave = true
-//         }
-//       }
-//       setFavorite(constant.filter(item => item.fave == true))
-//     })
-//   }
-//   function inputvalue(e) {
-//     console.log(e.target.value)
-//     var arr = []
-//     main && main.map((number) => {
-//       var tester = number.caption
-//       if (tester.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1) {
-//         arr.push(number)
-//       }
-//       else {
-//         setProducts([])
-//       }
-//     })
-//     setProducts(arr)
-//     if (e.target.value === "") { setProducts(main) }
-//   }
-//   const SearchbarOpen = () => {
-//     setSearchbar(true)
-//     setSearchbarAnimation("open")
-//   }
-//   const SearchbarClose = () => {
-//     setSearchbarAnimation("close")
-//     setTimeout(function () { setSearchbar(false) }
-//       , 700
-//     )
-//   }
-//   const quantitychange = (e) => {
-//     if (e.target.value>99 ){}
-//     else {setQuantity(e.target.value) }
-//    }
-//    const basketproductchange = (id) => {
-//     main && main.map((number) => {
-//        if (number.id === id) {
-//          number.count=quantity
-//        }
-//        setProductsId(constant.filter(item => item.count > 0))
-//        setCartcount(constant.filter(item => item.count > 0).reduce((total) => total = total + 1, 0))
-//      })
-//      setQuantity(1)
-//    }
-// value={{products,main,basket,productsId,favorite,favoritebutton,cardcount,SearchbarOpen,SearchbarClose,Searchbar,SearchbarAnimation,inputvalue,basketminus}}

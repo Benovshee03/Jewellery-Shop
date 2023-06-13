@@ -1,3 +1,6 @@
+.main{
+    position: relative;
+}
 .top{
     width: 100%;
     height: 40px;
@@ -25,7 +28,7 @@ header.scrolled {
     text-transform: uppercase;
 }
 .login__part{
-    width: 20%;
+    width: 25%;
     text-align: right;
     display: flex;
     align-items: center;
@@ -58,7 +61,7 @@ header.scrolled {
     align-items: center;
 }
 .left {
-    width: 11%;
+    width: 14%;
     height: 20px;
     display: flex;
     justify-content: space-evenly;
@@ -67,7 +70,15 @@ header.scrolled {
     align-items: center;
     cursor: pointer;
 }
-
+.mid{
+    width: 50%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    left: 25%;
+    bottom: 14%;
+    position: absolute;
+}
 .right{
     width: 14%;
     height: 20px;
@@ -100,8 +111,18 @@ header.scrolled {
 .name{
     color: white;
     position: relative;
-    left: -35%;
-    top: 4px;
+    left: -15%;
+    /* top: 2px; */
+    font-size: 12px;
+    font-family: FuturaPTBook;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.search{
+    color: white;
+    position: relative;
+    left: -24%;
+    top: px;
     font-size: 12px;
     font-family: FuturaPTBook;
     text-transform: uppercase;
@@ -170,3 +191,190 @@ ul button{
 }
 .menu__second a{ transition: all .2s ease-in-out; }
 .menu__second a:hover { transform: scale(0.5); }
+
+.searchPart{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Noto Sans TC,sans-serif;
+    background: #fff;
+    position: absolute;
+    transition: 0.5s ease-in;
+    top: -500px;
+    z-index: 200;
+}
+.search__part__close{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Noto Sans TC,sans-serif;
+    background: #fff;
+    position: fixed;
+    transition: 0.5s ease-in;
+    top: 0;
+    z-index: 200;
+}
+.search__top{
+    width: 90%;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+}
+.close{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.2em;
+    font-weight: 500;
+}
+.close .times{
+    width: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    
+}
+.times img{
+    width: 40px;
+    height:30px;
+    opacity: 77%;
+    
+}
+.input{
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid black;
+}
+.input div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.input input {
+    border: none;
+    width: 100%;
+    /* height: 80px; */
+}
+.search__bottom  {
+    width: 100%;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bottom__first{
+    width: 90%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.top__collections{
+    width: 20%;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .08em;
+    color: #000;
+    text-transform: uppercase;
+}
+.top__right{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.best{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .08em;
+    color: #000;
+    text-transform: uppercase;
+}
+.all{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #000;
+    opacity: .3;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-decoration: none;
+}
+.bottom__second{
+    width: 90%;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+.collect{
+    width: 20%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+.boxes{
+    width: 80%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: space-between;
+    gap: 5%;
+}
+.item{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    line-height: 1.2em;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.item .description{
+    position: absolute;
+    top: 74%;
+}
+.item .price{
+    position: absolute;
+    top:77%;
+}
+.item img{
+    width: 100%;
+    height: 60%;
+    background-color: rgb(250, 247, 247);
+    transition: 0.5s ease-in-out;
+}
+.item img:hover{
+    transform: scale(1.05);
+}
+.filtered__text{
+    width: 90%;
+    height: 30px;
+    gap: 0;
+    letter-spacing: .02em;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 2.5em;
+    color: #000;
+}
