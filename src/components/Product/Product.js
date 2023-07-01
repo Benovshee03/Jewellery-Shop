@@ -11,7 +11,7 @@ export default function Product() {
   const { product } = useContext(MyContext);
   const { wishlist, deleteFromWishlist , addToWishlist , addToCart ,opacity} = useContext(MyContext);
   const [hovered, setHovered] = useState(false);
-  console.log(opacity);
+ 
   const [isOpen, setIsOpen] = useState({
     showFilters: true,
     priceFilter: true,
@@ -432,7 +432,7 @@ export default function Product() {
                         <div className={ProCss.hovered__image}  
 >
                                <img onMouseEnter={handleHover} onMouseLeave={handleMouseLeave} src={hovered ?  "http://91.107.207.100:81" + e.images[1].image_url : "http://91.107.207.100:81" + e.images[0].image_url } alt="Shape" /> 
-                               {console.log(hovered)}
+                              
                           </div>
                           {/* {console.log("http://91.107.207.100:81" + e.images[1].image_url)} */}
                       <div className={ProCss.icons}>
@@ -467,7 +467,7 @@ export default function Product() {
                         </Link>
                       </div>
                       <div
-                        className={ProCss.basket} onClick={() => handleAddToCart(e.id)}
+                        className={ProCss.basket} onClick={() => handleAddToCart(e)}
                       >
                         Add to basket
                       </div>

@@ -12,7 +12,7 @@ import times from "../svg/xmark-solid.svg";
 import store from "../svg/store-solid.svg";
 export default function Header() {
   const { searchProducts ,handleFilter ,setOpacity} = useContext(MyContext);
-  const { searchText } = useContext(MyContext);
+  const { helperData ,searchText} = useContext(MyContext);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   const setOpa = () => {
@@ -108,7 +108,6 @@ export default function Header() {
       >
         <div className={HeadCss.search__top}>
           <div className={HeadCss.close}>
-            <div onClick={() => setIsOpen(true)}>Close</div>
             <div className={HeadCss.times} onClick={delOpa}>
               <img src={times} alt="times" onClick={() => setIsOpen(true)} />
             </div>
@@ -137,7 +136,7 @@ export default function Header() {
           </div>
           <div className={HeadCss.bottom__second}>
                 <div  className={HeadCss.collect}>
-                {searchText && searchText.map((e) => {
+                {helperData && helperData.map((e) => {
               return (
                   <p className={HeadCss.filtered__text} key={e.id}>{e.name}</p>)
                 })}

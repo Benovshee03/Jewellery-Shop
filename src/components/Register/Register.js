@@ -88,7 +88,9 @@ export default function Register() {
                   onFocus={() => setuserFocus(true)}
                   onBlur={() => {setuserFocus(true)}}
                 />
-                <p id="uidnote" className={userFocus && user && !validName ? "RegCss.instruction" : "RegCss.offscreen"}><i class="fa-solid fa-circle-info"></i>Must begin with a letter<br/>4 to 24 characters<br/>Letters, numbers, unedrscores , hypens allowed.</p>
+                <p id="uidnote" className={userFocus && user && !validName ? "RegCss.instruction" : "RegCss.offscreen"}><i class="fa-solid fa-circle-info"></i>
+                Must begin with a letter <br/> 4 to 24 characters <br/> Letters, numbers, unedrscores , hypens allowed.
+                </p>
                 <TextField
                   required
                   id="outlined-required"

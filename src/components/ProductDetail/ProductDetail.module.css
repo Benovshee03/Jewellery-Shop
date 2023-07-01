@@ -1,8 +1,103 @@
-.main{
+.product__detail{
     width: 100%;
     height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
 }
-.detail{
+.main{
     width: 90%;
-    background-color: aqua;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.left{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pictures{
+    width: 25%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.pictures ul{
+    width: 100%;
+    height: 60%;
+    display: grid;
+    grid-template-rows: auto;
+}
+.pictures ul li {
+    width: 90%;
+    height: 80%;
+}
+.pictures ul li img{
+    width: 90%;
+    height: 90%;
+}
+.picture__main{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.picture__main img{
+    width: 100% ;
+    height: 60%;
+}
+.right{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.right__main{
+    width: 85%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.name__main{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.name{
+    font-size: 34px;
+    line-height: 1.2em;
+    font-family: Good Girl;
+}
+.about__speciality{
+    width: 100%;
+    height: 160px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5%;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.infos{
+    width: 100%;
+    /* height: 11%; */
+    font-weight: 400;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.infos i{
+    width: 40px;
+    height: 35px;
+    font-size: 20px;
+    color: #34513f;
 }

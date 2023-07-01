@@ -24,10 +24,14 @@ import ProductDetail from "./components/ProductDetail/ProductDetail";
 export const MyContext = createContext();
 
 function App() {
+
+
+
   const [product, setProduct] = useState([]);
   const [productDetail, setProductDetail] = useState([]);
   const [searchProducts, setSearchProducts] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [helperData, setHelperData] = useState('');
   const [cartItems, setCartItems] = useState([]);
   const [wishlist,setWishlist] = useState([])
   const [opacity, setOpacity] = useState(1);
@@ -35,6 +39,9 @@ function App() {
   // const setOpacit = () => {
   //   setOpacity(0.5); 
   // };
+  // useEffect(()=>{console.log("Yazdir",process.env.REACT_APP_BACKEND_URL)},[cartItems])
+
+ 
   // const [filteredData,setFilteredData] = useState([])
   const getData = async () => {
     try {
@@ -54,9 +61,10 @@ function App() {
       }
       setProduct(allItems);
       setSearchProducts(allItems);
-      setSearchText(allItems);
+      // setSearchText(allItems);
+      setHelperData(allItems)
       setProductDetail(allItems);
-      setCartItems(allItems)
+      
     } catch (error) {
       console.error("Error fetching items:", error);
     }
@@ -65,6 +73,7 @@ function App() {
   // Sebete elave etmek 
   const addToCart = (item) => {
     setCartItems((prevCartItems) => [...prevCartItems, item]);
+    console.log(item)
   };
   const deleteFromCart = (itemId) => {
     setCartItems((prevCart) => prevCart.filter((item) => item.id !== itemId));
@@ -80,8 +89,8 @@ function App() {
   // Search hissesindekileri filterlemek............................................
   const filterText = (searchText, filter) => {
     return (
-      searchText &&
-      searchText.filter((value) =>
+      helperData &&
+      helperData.filter((value) =>
         value.name.toLowerCase().includes(filter.toLowerCase())
       )
     );
@@ -90,18 +99,18 @@ function App() {
   const handleFilter = (e) => {
     const filter = e.target.value.trim();
     const filteredText = filterText(searchText, filter);
-    if(filter === ""){
+    if(filter == ""){
       setSearchText([])
     }else{
-      setSearchText(filteredText)
+      setHelperData(filteredText)
     }
-    console.log( searchText);
+    console.log( helperData);
   };
-
+console.log(searchText);
 
   useEffect(() => {
     getData();
-  }, [product]);
+  }, []);
 
 
 
@@ -120,7 +129,8 @@ function App() {
           cartItems, 
           addToCart , 
           deleteFromCart , 
-          setOpacity , 
+          setOpacity ,
+          helperData, 
           opacity}}
       >
         <ScrollToTop />

@@ -32,33 +32,35 @@ export default function Cart() {
             <th></th>
           </thead>
           <tbody>
-          {product.map((e,i) => {
-                      <tr key={i}>
-                      <td className={CartCss.image}>
-                        <img src="" alt="cartimage" width="60px" height="60px" />
-                      </td>
-                      <td className={CartCss.caption}>{e.name}</td>
-                      <td className={CartCss.price}>${e.price}</td>
-                      <td className={CartCss.quantity}>
-                        <button className={CartCss.quant}>
-                          <button className={CartCss.minus}>-</button>
-                          <span className={CartCss.total}>${e.price}</span>
-                          <button className={CartCss.plus}>+</button>
-                        </button>
-                      </td>
-                      <td>$600</td>
-                      <td>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="gray"
-                          viewBox="0 0 512 512"
-                          width="20px"
-                          onClick={() => handleRemoveFromCart(e.id)}
-                        >
-                          <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
-                        </svg>
-                      </td>
-                    </tr>
+          {cartItems.map((e,i) => {
+          return (
+            <tr key={i}>
+            <td className={CartCss.image}>
+              <img src="" alt="cartimage" width="60px" height="60px" />
+            </td>
+            <td className={CartCss.caption}>{e.name}</td>
+            <td className={CartCss.price}>${e.price}</td>
+            <td className={CartCss.quantity}>
+              <button className={CartCss.quant}>
+                <button className={CartCss.minus}>-</button>
+                <span className={CartCss.total}>${e.price}</span>
+                <button className={CartCss.plus}>+</button>
+              </button>
+            </td>
+            <td>$600</td>
+            <td>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="gray"
+                viewBox="0 0 512 512"
+                width="20px"
+                onClick={() => handleRemoveFromCart(e.id)}
+              >
+                <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
+              </svg>
+            </td>
+          </tr>)
+                     
           })}
           </tbody>
           </table>
