@@ -14,7 +14,7 @@ import "react-multi-carousel/lib/styles.css";
 
 export default function Home() {
   const { searchProducts ,handleFilter ,opacity ,product} = useContext(MyContext);
-  const { searchText } = useContext(MyContext);
+  const { searchText, cartItemCount } = useContext(MyContext);
   const [isOpen, setIsOpen] = useState(true);
   const responsive = {
     desktop: {
@@ -53,8 +53,8 @@ export default function Home() {
           <div className={HomeCss.bottom}>
             <div className={HomeCss.left}>
               <Link to="/product">
-                <img src={shop} alt="menu_bar" width="20px" />
-                <span className={HomeCss.names}>Məhsullar</span>
+                <img src={shop} alt="menu_bar" width="20px" className={HomeCss.mehsul} />
+                <span className={HomeCss.names} id={HomeCss.mehsul}>Məhsullar</span>
               </Link>
               <Link onClick={() => setIsOpen(false)}>
                 <img src={Search} alt="search" width="20px" />
@@ -67,12 +67,12 @@ export default function Home() {
             <div className={HomeCss.right}>
               <Link to="/wishlist">
                 <img src={Wishlist} alt="wishlist" width="20px" />
-                <span className={HomeCss.names}>Favorİlər</span>
+                <span className={HomeCss.names}>Favorilər</span>
               </Link>
               <Link to="/cart">
                 <img src={Bag} alt="bag" width="20px" />
                 <span className={HomeCss.names}>
-                  Səbət <span>(0)</span>
+                  Səbət <span>({cartItemCount})</span>
                 </span>
               </Link>
             </div>
@@ -113,15 +113,15 @@ export default function Home() {
       <section className={HomeCss.shop__now} style={{opacity}}>
         <Link to="/product" className={HomeCss.shop__f}>
           <div className={HomeCss.shop__first}>Meliora x missoma</div>
-          <Link to="/product" className={HomeCss.shop__second}>shop now</Link>  
+          <Link to="/product" className={HomeCss.shop__second}>Indi al</Link>  
         </Link>
         <Link  to="/product" className={HomeCss.shop__s}>
           <div className={HomeCss.shop__first}>Meliora x Lucy Williams</div>
-          <Link to="/product" className={HomeCss.shop__second}>shop now</Link> 
+          <Link to="/product" className={HomeCss.shop__second}>Indi Al</Link> 
         </Link>
         <Link  to="/product" className={HomeCss.shop__t}>
           <div className={HomeCss.shop__first}>Best of Collabs</div>
-          <Link  to="/product" className={HomeCss.shop__second}>shop now</Link> 
+          <Link  to="/product" className={HomeCss.shop__second}>Indi Al</Link> 
         </Link>
       </section>
       <section className={HomeCss.about__us} style={{opacity}}>

@@ -4,8 +4,12 @@ import { MyContext } from "../../App";
 import WishCss from "../Wishlist/Wishlist.module.css";
 import wish from "../svg/wishlist.png";
 export default function Wishlist() {
-  const { wishlist, deleteFromWishlist , opacity } = useContext(MyContext);
+  const { wishlist, deleteFromWishlist , opacity, addToCart } = useContext(MyContext);
   
+  const handleAddToCartFromWishlist = (item) => {
+    addToCart(item);
+    console.log(item.id)
+  };
   return (
     <div className={WishCss.wishlist}>
       <Header />
@@ -21,14 +25,14 @@ export default function Wishlist() {
             <thead>
               <th></th>
               <th></th>
-              <th>Product name</th>
-              <th>Unit price</th>
-              <th>Stok durumu</th>
+              <th>Məhsulun adı</th>
+              <th>Qiyməti</th>
+              {/* <th>Stok durumu</th> */}
               <th></th>
             </thead>
             <tbody className={WishCss.wish__table}>
               {wishlist.map((e) => (
-                <tr>
+                <tr key={e.id}>
                   <td>
                     <svg onClick={() => deleteFromWishlist(e.id)}
                       xmlns="http://www.w3.org/2000/svg"
@@ -43,14 +47,14 @@ export default function Wishlist() {
                     <img
                       src="https://cdn.shopify.com/s/files/1/2278/7513/products/SBN171-A_1350x1800.jpg?v=1677272649"
                       alt="image"
-                      width="40px"
+                      width="100px"
+                      height="120px"
                     />
                   </td>
                   <td>{e.name}</td>
                   <td>${e.price}</td>
-                  <td>In Stock</td>
                   <td >
-                    <div className={WishCss.add}>Add to cart</div>
+                    <div className={WishCss.add} onClick={() => handleAddToCartFromWishlist(e)}>Add to cart</div>
                   </td>
                 </tr>
               ))}

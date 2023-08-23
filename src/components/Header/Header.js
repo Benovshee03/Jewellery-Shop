@@ -11,7 +11,7 @@ import times from "../svg/xmark-solid.svg";
 // import Menu from "../svg/menu.svg";
 import store from "../svg/store-solid.svg";
 export default function Header() {
-  const { searchProducts ,handleFilter ,setOpacity} = useContext(MyContext);
+  const { searchProducts ,handleFilter ,setOpacity,cartItemCount} = useContext(MyContext);
   const { helperData ,searchText} = useContext(MyContext);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -50,7 +50,7 @@ export default function Header() {
             <div className={HeadCss.line}></div>
             <Link to="/contact">Əlaqə</Link>
             <div className={HeadCss.line}></div>
-            <Link  >Daxİl ol</Link>
+            <Link  to="/login">Daxİl ol</Link>
           </div>
         </div>
         <div className={HeadCss.bottom}>
@@ -75,7 +75,7 @@ export default function Header() {
             <Link to="/cart">
               <img src={Bag} alt="bag" width="20px" />
               <span className={HeadCss.names}>
-                Səbət <span>(0)</span>
+                Səbət <span>({cartItemCount})</span>
               </span>
             </Link>
           </div>

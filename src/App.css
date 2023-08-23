@@ -4,3 +4,15 @@
   list-style: none;
   box-sizing: border-box;
 }
+.star-rating {
+  font-size: 24px;
+}
+
+.star {
+  cursor: pointer;
+  color: #ccc;
+}
+
+.star.active {
+  color: #f7bc3d; 
+}

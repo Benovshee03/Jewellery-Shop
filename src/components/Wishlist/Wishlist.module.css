@@ -64,10 +64,16 @@ th{
     top: 87%;
 }
 .add{
-    width: 95px;
+    width: 115px;
     height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+    letter-spacing: 1px;
+    border: 1px solid #34513f;
+    background-color: #34513f;
+    color: white;
+}
+.add:hover{
+    background-color: black;
 }

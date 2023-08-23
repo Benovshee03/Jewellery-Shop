@@ -3,15 +3,19 @@ import ProCss from "../Product/Product.module.css";
 import { Link } from "react-router-dom";
 import { MyContext } from "../../App";
 import Header from "../Header/Header";
+// import Carousel from "..Carousel/Carousel.js";
 import Categories from "../Categories/Categories";
 import customize from "../svg/customize.svg";
-import { prototype } from "google-map-react";
-
+// import { prototype } from "google-map-react";
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
 export default function Product() {
   const { product } = useContext(MyContext);
-  const { wishlist, deleteFromWishlist , addToWishlist , addToCart ,opacity} = useContext(MyContext);
+  const { wishlist, deleteFromWishlist , addToWishlist ,opacity ,handleCloseAlert, isAlertOpen, handleAddToCart , handleClosePopUp,isPopUpVisible ,setPopUpVisible} = useContext(MyContext);
   const [hovered, setHovered] = useState(false);
- 
   const [isOpen, setIsOpen] = useState({
     showFilters: true,
     priceFilter: true,
@@ -34,10 +38,18 @@ export default function Product() {
     size: [],
     promo: [],
   });
+  useEffect(() => {
+    setSelectedFilters({
+      price: [],
+      product:  [],
+      metal: [],
+      material:  [],
+      color: [],
+      size: [],
+      promo: [],
+    });
+  }, []);
 
-  const handleAddToCart = (productId) => {
-    addToCart(productId);
-  };
   useEffect(() => {
     if (fetchedImages && fetchedImages.length > 0) {
       const allImages = fetchedImages.map((product) => product.images);
@@ -53,7 +65,7 @@ export default function Product() {
   };
   useEffect(() => {
     applyFilters();
-  }, [selectedFilters]); 
+  }, [selectedFilters, product]); 
 
   const applyFilters = () => {
     let filteredData = product.slice(); 
@@ -74,14 +86,14 @@ export default function Product() {
 
     if (selectedFilters.metal.length > 0) {
       filteredData = filteredData.filter((item) => {
-        const metal = item.metal_type;
+        const metal = item.metal;
         return selectedFilters.metal.includes(metal);
       });
     }
 
     if (selectedFilters.material.length > 0) {
       filteredData = filteredData.filter((item) => {
-        const material = item.material_type;
+        const material = item.material;
         return selectedFilters.material.includes(material);
       });
     }
@@ -101,26 +113,64 @@ export default function Product() {
     if (filterType === "product") {
       setSelectedFilters((prevState) => ({
         ...prevState,
-        product: value
+        product: value,
+      }));
+    } else if (filterType === "metal_type") {
+      setSelectedFilters((prevState) => ({
+        ...prevState,
+        metal: prevState.metal.includes(value)
+          ? prevState.metal.filter((filter) => filter !== value)
+          : [...prevState.metal, value],
+      }));
+    } else if (filterType === "material_type") {
+      setSelectedFilters((prevState) => ({
+        ...prevState,
+        material: prevState.material.includes(value)
+          ? prevState.material.filter((filter) => filter !== value)
+          : [...prevState.material, value],
       }));
     } else {
-      setSelectedFilters((prevState) => {
-        const updatedFilters = prevState[filterType].includes(value)
+      setSelectedFilters((prevState) => ({
+        ...prevState,
+        [filterType]: prevState[filterType].includes(value)
           ? prevState[filterType].filter((filter) => filter !== value)
-          : [...prevState[filterType], value];
-
-        return {
-          ...prevState,
-          [filterType]: updatedFilters
-        };
-      });
+          : [...prevState[filterType], value],
+      }));
     }
-
   };
 
+  const [sortOption, setSortOption] = useState("featured"); // Default sort option
 
+  const handleSortChange = (event) => {
+    setSortOption(event.target.value);
+  };
+
+  // Define a function to sort the products based on the selected sort option
+  const sortProducts = () => {
+    switch (sortOption) {
+      case "newest":
+        setFilteredProducts([...filteredProducts].sort((a, b) => b.id - a.id));
+        break;
+      case "low-high":
+        setFilteredProducts([...filteredProducts].sort((a, b) => a.price - b.price));
+        break;
+      case "high-low":
+        setFilteredProducts([...filteredProducts].sort((a, b) => b.price - a.price));
+        break;
+      default:
+        // "featured" option or any unknown option
+        setFilteredProducts(product.slice());
+        break;
+    }
+  };
+
+  // Call the sortProducts function whenever the sort option changes or the filtered products change
+  useEffect(() => {
+    sortProducts();
+  }, [sortOption]);
   
-
+  
+  // console.log(filteredProducts);
   const handleHover = () => {
     setHovered(true);
   };
@@ -131,8 +181,17 @@ export default function Product() {
 
   return (
     <div className={ProCss.product} >
+          <Dialog open={isAlertOpen} onClose={handleCloseAlert}>
+      <DialogTitle>Diqqət</DialogTitle>
+      <DialogContent>
+        <p>Bu məhsul səbətinizdə artıq mövcuddur.</p>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleCloseAlert}>Davam et</Button>
+      </DialogActions>
+    </Dialog>
       <Header className={ProCss.head} />
-      <Categories />
+      <Categories  />
       <section className={ProCss.main} style={{opacity}}>
         <div className={ProCss.first}>
           <div
@@ -151,7 +210,13 @@ export default function Product() {
           </div>
           <div className={ProCss.sort}>
             Sırala:{""}
-            <select name="filter" id="sort" width="40px" height="20px">
+            <select
+            id="sort" 
+            width="40px" 
+            height="20px"          
+            name="filter"
+          value={sortOption}
+          onChange={handleSortChange}>
               <option value="featured">Featured</option>
               <option value="newest">Yenilər</option>
               <option value="low-high">Qiymət:Ucuzdan-Bahaya</option>
@@ -225,12 +290,12 @@ export default function Product() {
               >
                 <li>
                   <input type="checkbox" value="earring"
-            checked={selectedFilters.product.includes("earring")}
-            onChange={(e) => handleFilterChange("product", e.target.value)} /> Sırğa
+              checked={selectedFilters.product.includes("earring")}
+              onChange={(e) => handleFilterChange("product", e.target.value)} /> Sırğa
                 </li>
                 <li>
-                  <input type="checkbox" value="ring"
-            checked={selectedFilters.product.includes("ring")}
+                  <input type="checkbox" value="uzuk"
+            checked={selectedFilters.product.includes("uzuk")}
             onChange={(e) => handleFilterChange("product", e.target.value)}/> Üzük
                 </li>
                 <li>
@@ -248,17 +313,11 @@ export default function Product() {
             <div className={ProCss.metal__filter}>
               <div
                 onClick={() => toggleNavbar("metalFilter")}
-                className={
-                  isOpen.metalFilter ? ProCss.arrow__close : ProCss.arrow
-                }
+                className={isOpen.metalFilter ? ProCss.arrow__close : ProCss.arrow}
               >
                 <p>Metal növü</p>
                 <i
-                  className={
-                    isOpen.metalFilter
-                      ? "fa-solid fa-angle-down"
-                      : "fa-solid fa-chevron-up"
-                  }
+                  className={isOpen.metalFilter ? "fa-solid fa-angle-down" : "fa-solid fa-chevron-up"}
                 ></i>
               </div>
               <ul
@@ -269,19 +328,30 @@ export default function Product() {
                 }
               >
                 <li>
-                  <input type="checkbox" /> 9/10K Saf Qızıl{" "}
+                  <input type="checkbox" 
+        value="saf"
+        checked={selectedFilters.metal.includes("saf")}
+        onChange={(e) => handleFilterChange("metal", e.target.value)}/> 9/10K Saf Qızıl{" "}
                 </li>
                 <li>
-                  <input type="checkbox" /> 14K SSaf Qızıl{" "}
+                  <input         value="qızıl"
+        checked={selectedFilters.metal.includes("qızıl")}
+        onChange={(e) => handleFilterChange("metal", e.target.value)} type="checkbox" /> 14K Saf Qızıl{" "}
                 </li>
                 <li>
-                  <input type="checkbox" /> Qızıl Doldurma / Kaplama{" "}
+                  <input type="checkbox"         value="kaplama"
+        checked={selectedFilters.metal.includes("kaplama")}
+        onChange={(e) => handleFilterChange("metal", e.target.value)}/> Qızıl Doldurma / Kaplama{" "}
                 </li>
                 <li>
-                  <input type="checkbox" /> Saf gümüş{" "}
+                  <input type="checkbox"         value="gumus"
+        checked={selectedFilters.metal.includes("gumus")}
+        onChange={(e) => handleFilterChange("metal", e.target.value)}/> Saf gümüş{" "}
                 </li>
                 <li>
-                  <input type="checkbox" /> Platin{" "}
+                  <input type="checkbox"         value="platin"
+        checked={selectedFilters.metal.includes("platin")}
+        onChange={(e) => handleFilterChange("metal", e.target.value)}/> Platin{" "}
                 </li>
               </ul>
             </div>
@@ -309,16 +379,24 @@ export default function Product() {
                 }
               >
                 <li>
-                  <input type="checkbox"  /> Düz Qızıl
+                  <input type="checkbox"  value="duzqizil"
+              checked={selectedFilters.material.includes("duzqizil")}
+              onChange={(e) => handleFilterChange("material", e.target.value)}/> Düz Qızıl
                 </li>
                 <li>
-                  <input type="checkbox" /> Almaz
+                  <input type="checkbox" value="almaz"
+              checked={selectedFilters.material.includes("almaz")}
+              onChange={(e) => handleFilterChange("material", e.target.value)}/> Almaz
                 </li>
                 <li>
-                  <input type="checkbox" /> Qiymətli daş
+                  <input type="checkbox" value="das"
+              checked={selectedFilters.material.includes("das")}
+              onChange={(e) => handleFilterChange("material", e.target.value)}/> Qiymətli daş
                 </li>
                 <li>
-                  <input type="checkbox" /> İnci
+                  <input type="checkbox" value="inci"
+              checked={selectedFilters.material.includes("inci")}
+              onChange={(e) => handleFilterChange("material", e.target.value)}/> İnci
                 </li>
               </ul>
             </div>
@@ -425,18 +503,15 @@ export default function Product() {
             <div
               className={isOpen.showFilters ? ProCss.box__close : ProCss.box}
             >
-              {product &&
-                product.map((e, indexone) => {
+              {filteredProducts &&
+                filteredProducts.map((e, indexone) => {
                   return (
-                    <div key={indexone }   className={ProCss.item} >
-                        <div className={ProCss.hovered__image}  
->
-                               <img onMouseEnter={handleHover} onMouseLeave={handleMouseLeave} src={hovered ?  "http://91.107.207.100:81" + e.images[1].image_url : "http://91.107.207.100:81" + e.images[0].image_url } alt="Shape" /> 
-                              
-                          </div>
-                          {/* {console.log("http://91.107.207.100:81" + e.images[1].image_url)} */}
+                    <Link key={indexone }   className={ProCss.item} >
+                         <div className={ProCss.hovered__image} onMouseEnter={handleHover}  onMouseLeave={handleMouseLeave}>
+                          <img  src={hovered ?  "http://91.107.207.100:81" + e.images[1].image_url : "http://91.107.207.100:81" + e.images[0].image_url } alt="Shape" /> 
+                        </div>
                       <div className={ProCss.icons}>
-                        <Link>
+                        <Link  >
                         {wishlist.some((wishlistItem) => wishlistItem.id === e.id) ? (
                           <svg onClick={() => deleteFromWishlist(e.id)}
                             xmlns="http://www.w3.org/2000/svg"
@@ -473,14 +548,21 @@ export default function Product() {
                       </div>
 
                       <div className={ProCss.description}>{e.name}</div>
-                      <div className={ProCss.price}>${e.price}</div>
-                    </div>
+                      <div className={ProCss.price}>${e.total_price}</div>
+                    </Link>
                   );
                 })}
             </div>
           </div>
         </div>
       </section>
+      {isPopUpVisible && (
+      <div className={ProCss.popup_container}>
+        <div className={ProCss.popup}>
+          <p>Səbətinizə əlavə olundu!</p>
+        </div>
+        </div>
+      )}
     </div>
   );
 }

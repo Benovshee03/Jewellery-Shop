@@ -27,7 +27,7 @@
     background-position: center center;
 }
 .header{
-    width: 90%;
+    width: 100%;
     height: 95vh;
     display: flex;
     flex-direction: column;
@@ -36,11 +36,12 @@ a{
     text-decoration: none;
 }
 .top{
-    width: 100%;
+    width: 95%;
     height: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-left: 2%;
     color: hsla(0,0%,100%,.5)
 }
 .text{
@@ -81,13 +82,17 @@ a{
     align-items: center;
 }
 .left {
-    width: 11%;
-    height: 20px;
+    width: 14%;
+    height: 36px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     cursor: pointer;
-    gap: 5px;
+}
+.mid{
+    width: 50%;
+    display: flex;
+    justify-content: center;
 }
 .right{
     width: 14%;
@@ -108,6 +113,23 @@ a{
     flex-direction: column;
     gap: 10%;
 }
+.left a{
+    width: 21px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.mehsul{
+    position: absolute;
+    top: -20px;
+}
+#mehsul{
+    position: absolute;
+    left: -24px;
+    top: 5px;
+}
+
 .left a img:hover , .right a img:hover{
     fill: hsla(135, 94%, 7%, 0.5);
 }
@@ -127,6 +149,7 @@ a{
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+
 .season{
     width: 100%;
     height: 900px;

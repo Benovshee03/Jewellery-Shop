@@ -1,3 +1,10 @@
+.all{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .product__detail{
     width: 100%;
     height: auto;
@@ -29,7 +36,7 @@
     width: 100%;
     height: 60%;
     display: grid;
-    grid-template-rows: auto;
+    grid-template-rows: 1fr 1fr 1fr 1fr ;
 }
 .pictures ul li {
     width: 90%;
@@ -38,6 +45,7 @@
 .pictures ul li img{
     width: 90%;
     height: 90%;
+    background-color: #faf9f9;
 }
 .picture__main{
     width: 90%;
@@ -49,6 +57,7 @@
 .picture__main img{
     width: 100% ;
     height: 60%;
+    background-color: #faf9f9;
 }
 .right{
     width: 50%;
@@ -78,7 +87,7 @@
 }
 .about__speciality{
     width: 100%;
-    height: 160px;
+    height: 200px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5%;
@@ -101,3 +110,240 @@
     font-size: 20px;
     color: #34513f;
 }
+.description{
+    width: 100%;
+    height: 80px;
+    font-family: Noto Sans TC,sans-serif;
+    font-size: 14px;
+    line-height: 1.5em;
+    font-weight: 400;
+    display: block;
+    align-items: center;
+}
+.buttons{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.add{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 60px;
+    color: #fff;
+    background:#34513f;
+    font-weight: 500;
+    letter-spacing: .08em;
+}
+.add:hover{
+    background-color: black;
+    
+}
+.heart{
+    width: 9%;
+    height: 100%;
+    border: 1px solid #cecece;
+}
+.heart:hover{
+    background-color: #34513f;
+    color: white;
+}
+.recommend__text{
+    width: 100%;
+    height:60px ;
+    display: flex;
+    justify-content: center;
+    font-family: Uchen Regular;
+    align-items: center;
+    color: #34513F;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 46px;
+    margin-top: 35px;
+
+}
+
+.items{
+    width: 90%;
+    height: 500px;
+    margin-top: 20px;
+    display: flex;
+}
+.box{
+    width:90%;
+}
+.item{
+    width: 310px;
+    height: 460px;
+    font-family: Uchen Regular;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: #868686;
+    /* gap: 5px; */
+    border-radius: 2px;
+    position: relative;
+
+}
+.item:hover .basket{
+    opacity: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    line-height: 16px;
+}
+.basket:hover{
+    font-size: 20px;
+}
+.image{
+    width: 100%;
+    height: 390px;
+    position: absolute;
+    z-index: -1;
+    background-color: rgb(250, 247, 247);
+}
+.basket{
+    width: 100%;
+    height: 390px;
+    background-color: #34513F;
+    color: white;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    line-height: 16px;
+    opacity: 0;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+.description{
+    text-transform: uppercase;
+    position: absolute;
+    top: 85%;
+}
+
+
+/* ProductDetail.module.css */
+.review {
+    width: 90%;
+    margin-top: 20px;
+    padding: 20px;
+  }
+  
+  .text {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: Uchen Regular;
+    align-items: center;
+    color: #34513F;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 46px;
+    margin-top: 85px;
+  }
+  
+  .reviews {
+    margin-bottom: 20px;
+  }
+  
+  .review__item {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    
+  }
+  
+  .review__name {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .review__content {
+    margin-top: 5px;
+  }
+  
+  .review__rating {
+    margin-top: 10px;
+  }
+  
+  .star-rating {
+    font-size: 24px;
+  }
+  
+  .star {
+    cursor: pointer;
+    color: #ccc; /* Default color for empty stars */
+  }
+  
+  .star.active {
+    color: yellow; /* Yellow color for filled stars */
+  }
+  
+  .review__form form {
+    margin-top: 20px;
+  }
+  
+  .review__form div {
+    margin-bottom: 10px;
+  }
+  
+  .review__form label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .review__form input,
+  .review__form textarea {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .review__form textarea {
+    resize: vertical;
+    height: 100px;
+  }
+  
+  .review__form button {
+    background-color: #34513F;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .review__form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Media Query for Responsive Web Design */
+  @media screen and (max-width: 768px) {
+    .review__form input,
+    .review__form textarea {
+      font-size: 14px;
+    }
+  
+    .review__form button {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }
+  

@@ -61,11 +61,11 @@ export default function Footer() {
       </div>
       <div className={FooterCss.bottom}>
         <div className={FooterCss.part}>
-          <div className={FooterCss.num}>+994(55)-673-34-78</div>
+          <div className={FooterCss.num}>Əlaqə</div>
           <div className={FooterCss.links}>
             <div className={FooterCss.adress}>Baku,Bakikhanov 37</div>
             <div>meliora0accessories@gmail.com</div>
-            <div></div>
+            <div>+994(55)-673-34-78</div>
             <div></div>
           </div>
         </div>

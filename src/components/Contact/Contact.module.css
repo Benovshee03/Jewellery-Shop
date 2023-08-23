@@ -65,9 +65,63 @@
 .map{
     width: 600px;
     height: 550px;
+    display: flex;
+    flex-direction: column;
+}
+.map form{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.namesur{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+}
+.name , .surname{
+    width: 48%;
+    height: 100%;
+    border: 1px solid gray;
+    text-indent: 10px;
+}
+.mailmid{
+    width: 100%;
+    height: 20%;
+}
+.mail{
+    width: 100%;
+    height: 100%;
+    text-indent: 10px;
+    border: 1px solid gray;
+
+}
+.message{
+    width: 100%;
+    height: 30%;
+}
+.message textarea{
+    width: 100%;
+    height: 100%;
+    text-indent: 10px;
+    border: 1px solid gray;
+
+
+}
+.map form button{
+    width: 100%;
+    height: 20%;
+    border: 1px solid gray;
+    background-color: #34513f;
+    color: white;
+    font-weight: 500;
+    font-size: 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .map iframe{
     width: 100%;
-    height: 100%;
+    height: 40%;
     box-shadow:5px 10px #f8eeee;
 }

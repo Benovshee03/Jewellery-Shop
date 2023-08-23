@@ -3,18 +3,55 @@ import { Link } from "react-router-dom";
 import CartCss from "../Cart/Cart.module.css";
 import Header from "../Header/Header";
 import { MyContext } from "../../App";
-import { useContext } from "react";
+import { useContext ,useState ,useEffect} from "react";
 
 import image from "../svg/5.png"
 
 export default function Cart() {
-  const {product ,  cartItems, removeFromCart , opacity} = React.useContext(MyContext);
+  const {product ,  cartItems, deleteFromCart , opacity} = useContext(MyContext);
+  const [quantities, setQuantities] = useState(cartItems.map(() => 1));
+const [totalPrices, setTotalPrices] = useState(cartItems.map((item) => item.price));
+const [cartTotal, setCartTotal] = useState(0);
+
   // const cartTotal = product.reduce((total, product) => {
   //     return total + product.price * product.quantity;
   //   }, 0);
   const handleRemoveFromCart = (productId) => {
-    removeFromCart(productId);
+    deleteFromCart(productId);
   };
+
+const handleDecreaseQuantity = (index) => {
+  if (quantities[index] > 1) {
+    const newQuantities = [...quantities];
+    newQuantities[index] -= 1;
+    setQuantities(newQuantities);
+
+    const newTotalPrices = [...totalPrices];
+    newTotalPrices[index] = newQuantities[index] * cartItems[index].price;
+    setTotalPrices(newTotalPrices);
+  }
+};
+
+const handleIncreaseQuantity = (index) => {
+  const newQuantities = [...quantities];
+  newQuantities[index] += 1;
+  setQuantities(newQuantities);
+
+  const newTotalPrices = [...totalPrices];
+  newTotalPrices[index] = newQuantities[index] * cartItems[index].price;
+  setTotalPrices(newTotalPrices);
+};
+useEffect(() => {
+  const calculateTotal = () => {
+    const total = cartItems.reduce((accumulator, item, index) => {
+      return accumulator + item.price * quantities[index];
+    }, 0);
+    setCartTotal(total);
+  };
+
+  calculateTotal();
+}, [cartItems, quantities]);
+
   return (
     <div>
       <Header />
@@ -24,11 +61,11 @@ export default function Cart() {
         ) : (
           <table>
           <thead>
-            <th>Product</th>
+            <th>Məhsul</th>
             <th></th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
+            <th>Qiymət</th>
+            <th>Sayı</th>
+            <th>Ümumi Qiymət</th>
             <th></th>
           </thead>
           <tbody>
@@ -36,18 +73,18 @@ export default function Cart() {
           return (
             <tr key={i}>
             <td className={CartCss.image}>
-              <img src="" alt="cartimage" width="60px" height="60px" />
+              <img src={"http://91.107.207.100:81" + e.images[0].image_url} alt="cartimage" width="60px" height="60px" style={{backgroundColor:"#e8e8e8"}} />
             </td>
             <td className={CartCss.caption}>{e.name}</td>
-            <td className={CartCss.price}>${e.price}</td>
+            <td className={CartCss.price}> ${e.price}</td>
             <td className={CartCss.quantity}>
               <button className={CartCss.quant}>
-                <button className={CartCss.minus}>-</button>
-                <span className={CartCss.total}>${e.price}</span>
-                <button className={CartCss.plus}>+</button>
+                <button className={CartCss.minus} onClick={() => handleDecreaseQuantity(i)}>-</button>
+                <span className={CartCss.total}>{quantities[i]}</span>
+                <button className={CartCss.plus} onClick={() => handleIncreaseQuantity(i)}>+</button>
               </button>
             </td>
-            <td>$600</td>
+            <td>${totalPrices[i]}</td>
             <td>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -67,19 +104,19 @@ export default function Cart() {
         )}
         <div className={CartCss.shipping}>
           <div className={CartCss.totals}>
-            <div className={CartCss.total}>$60</div>
+            <div className={CartCss.total}>Səbəti Təstiqlə</div>
           </div>
           <div className={CartCss.bottom}>
             <div className={CartCss.part}>
-              <div className={CartCss.ship}>Shipping</div>
-              <div className={CartCss.pri}>$600</div>
+              <div className={CartCss.ship}>Çatdırılma</div>
+              <div className={CartCss.pri}>$10</div>
             </div>
             <div className={CartCss.part}>
-              <div className={CartCss.ship}>Total</div>
-              <div className={CartCss.pri}>600$</div>
+              <div className={CartCss.ship}>Ümumi məbləğ</div>
+              <div className={CartCss.pri}>${cartTotal}</div>
             </div>
             <Link></Link>
-            <button className={CartCss.checkout}>Proceed to checkout</button>
+            <button className={CartCss.checkout}>Səbəti Təstiqlə</button>
             <Link />
           </div>
         </div>
@@ -87,73 +124,4 @@ export default function Cart() {
     </div>
   );
 }
-// const mydata = React.useContext(Globalcontext)
-//     const total = (mydata.productsId.reduce((total, current) => total = total + current.price * current.count, 0
-//     ));
-// return (
-//         <div className={styles.cart_total}>
-//             <table className={styles.cart_table}   >
-//                 <thead>
-//                     <tr>
-//                         <th></th>
-//                         <th>Mehsulun adi</th>
-//                         <th>Qiymeti</th>
-//                         <th>Say</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     {mydata.productsId && mydata.productsId.slice(0, 4).map((number, indexone) => {
-//                         return (
-//                             <tr key={indexone}>
-//                                 <td>
-//                                     <div className={styles.image_box}>
-//                                         <div className={styles.image_hover}>
-//                                             <img className={styles.image} src={number.img1} alt="" />
-//                                             <img className={styles.image} src={number.img2} alt="" />
-//                                         </div>
-//                                     </div>
-//                                 </td>
-//                                 <td>
-//                                     {number.caption}
-//                                 </td>
-//                                 <td>
-//                                     {number.price} AZN
-//                                 </td>
-//                                 <td>
-//                                     <button onClick={() => { mydata.basketminus(number.id) }} style={{ cursor: "pointer" }}>-</button>
-//                                     <span>
-//                                         {number.count}
-//                                     </span>
-//                                     <button onClick={() => { mydata.basket(number.id) }} style={{ cursor: "pointer" }} >+</button>
-//                                 </td>
-//                             </tr>
-//                         )
-// })}
-//                 </tbody>
-//             </table>
-//             <div className={styles.total}>
-//                 <b>Umumi mebleg</b>
-//                 <div className={styles.sum}>
-//                     <div>
-//                         <span>Qiymetler cemi:</span>
-//                         <span>{total} AZN</span>
-//                     </div>
-//                     <div>
-//                         <span>Chatdirilma:</span>
-//                         <span>Pulsuz</span>
-//                     </div>
-//                     <div>
-//                         <span>
-//                             Umumi cem:
-//                         </span>
-//                         <span>10 AZN</span>
-//                     </div>
-//                 </div>
-//                 <Link to="/checkout">
-//                     <button>
-//                         Checkout
-//                     </button>
-//                 </Link>
-//             </div>
-//         </div>
-//     )
+
