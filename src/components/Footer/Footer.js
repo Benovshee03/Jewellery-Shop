@@ -1,11 +1,9 @@
 import React , {useState} from "react";
-import { createContext } from "react";
 import { Link } from "react-router-dom";
 import FooterCss from "../Footer/Footer.module.css";
 import Twitter from "../svg/twitter.svg";
 import Instagram from "../svg/instagram.svg";
 import Fb from "../svg/facebook.svg";
-import meliora from '../svg/Meli.svg'
 import visa from '../svg/cc-visa.svg'
 import master from '../svg/cc-mastercard.svg'
 export default function Footer() {
@@ -25,7 +23,7 @@ export default function Footer() {
         <Link to="/" className={FooterCss.mel}>#MELIORA</Link>
         <div className={FooterCss.social}>
           <div className={FooterCss.Twitter}>
-            <a
+            <a rel="noreferrer"
               href="https://www.instagram.com/meliora_handmade/"
               target="_blank"
             >
@@ -33,7 +31,7 @@ export default function Footer() {
             </a>
           </div>
           <div className={FooterCss.insta}>
-            <a
+            <a rel="noreferrer"
               href="https://www.instagram.com/meliora_handmade/"
               target="_blank"
             >

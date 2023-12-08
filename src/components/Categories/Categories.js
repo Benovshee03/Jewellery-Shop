@@ -1,9 +1,9 @@
-import React,{useContext,useState} from "react";
+import React,{useContext} from "react";
 import { MyContext } from "../../App";
 import CatCss from "../Categories/Categories.module.css";
 import { Link } from "react-router-dom";
 export default function Categories() {
-  const { handleCategory, selectedCategory, handleCategoryClick} = useContext(MyContext);
+  const { handleCategory, selectedCategory} = useContext(MyContext);
 
   return (
     <>

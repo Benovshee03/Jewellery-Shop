@@ -3,7 +3,7 @@ import "./App.css";
 import Contact from "./components/Contact/Contact";
 import axios from "axios";
 import { useState, useEffect, createContext } from "react";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 
 import Home from "./components/Home/Home";
 import Product from "./components/Product/Product";
@@ -37,9 +37,6 @@ function App() {
   const [cartItemCount, setCartItemCount] = useState(0);
   const [isPopUpVisible, setPopUpVisible] = useState(false);
   const [user, setUser] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const config = { headers: { "Content-Type": "application/json" } };
-  // const [filteredProducts, setFilteredProducts] = useState(product);
   const [selectedFilters, setSelectedFilters] = useState({
     product: [],
     metal: [],
@@ -49,16 +46,11 @@ function App() {
     promo: [],
   });
   const [selectedCategory, setSelectedCategory] = useState(null);
-const navigate = useNavigate()
+// const navigate = useNavigate()
   const handleCategoryClick = (category) => {
     setSelectedCategory((prevCategory) => (prevCategory === category ? null : category));
   };
-  // const [selectedCategory, setSelectedCategory] = useState(null);
-
-  // butun pagelerin opacity si ucun
-  const setOpacit = () => {
-    setOpacity(0.5);
-  };
+ 
   const [blog,setBlog] = useState([])
   const getBlog = async () => {
     await axios.get(`http://91.107.207.100:81/api/blogs/list/`)
@@ -67,12 +59,12 @@ const navigate = useNavigate()
       setBlog(res.data) 
     })
         
-      // setBlog(blog)
+  
      .catch ((res) => {
       console.error("Error fetching items:", res);
     });
   };
-  // const [filteredData,setFilteredData] = useState([])
+
   const getData = async () => {
     try {
       let currentPage = 1;
@@ -91,18 +83,14 @@ const navigate = useNavigate()
       }
       setProduct(allItems);
       setSearchProducts(allItems);
-      // setSearchText(allItems);
+    
       setHelperData(allItems);
     } catch (error) {
       console.error("Error fetching items:", error);
     }
   };
 
-  // Sebete elave etmek;
-  // const addToCart = (item) => {
-  //   setCartItems((prevCartItems) => [...prevCartItems, item]);
-  //   console.log(item);
-  // };
+
 
   const handleAddToCart = (item) => {
     const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
@@ -173,8 +161,7 @@ const navigate = useNavigate()
     applyFilters(); 
   };
   
-  // console.log(selectedFilters);
-  // console.log(product);
+ 
   const applyFilters = () => {
     let filteredData = product.slice();
   
@@ -233,21 +220,6 @@ const navigate = useNavigate()
       return () => clearTimeout(timeout);
     }
   }, [isPopUpVisible]);
-  // const handleRegisterSubmit = (userData) => {
-  //   axios
-  //     .post("http://91.107.207.100:81/api/accounts/register/", userData, config)
-  //     .then((response) => {
-  //       console.log(response);
-  //       // Əgər qeydiyyat uğurlu olduysa, istifadəçiyə bir təbrik mesajı göstərək və onu login səhifəsinə yönləndirək
-  //       alert("Qeydiyyat uğurla başa çatdı!");
-  //       navigate(`/activation/${response.data.slug}`);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       // Əgər qeydiyyatda səhv baş veribsə, istifadəçiyə uyğun bir xəta mesajı göstərək
-  //       alert("Qeydiyyatda səhv baş verdi. Zəhmət olmasa, yenidən cəhd edin.");
-  //     });
-  // };
   return (
     <div className="App">
       <TokenProvider>
@@ -280,7 +252,7 @@ const navigate = useNavigate()
           isPopUpVisible,
           user,
           setUser,
-          // handleRegisterSubmit
+
         }}
       >
         <ScrollToTop />

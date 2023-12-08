@@ -1,5 +1,4 @@
 import React, { useState, useRef, useContext } from "react";
-import { useParams } from "react-router-dom";
 import { MyContext } from "../../App";
 import Header from "../Header/Header";
 import RegCss from "../Register/Register.module.css";
@@ -13,12 +12,11 @@ import { TokenContext } from "../TokenContext";
 import { useNavigate } from "react-router-dom";
 
 const userRegex = /^[A-Za-z]\w{4,14}$/;
-const pwdRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?~_+-=|\]).{8,32}$/;
 
 export default function Register() {
-  const { opacity,handleRegisterSubmit ,setUserData} = useContext(MyContext);
-  const { setAccessToken, setRefreshToken , handleActivationSlug} = useContext(TokenContext);
-  const [userFocus, setuserFocus] = useState(false);
+  const { opacity} = useContext(MyContext);
+  const { handleActivationSlug} = useContext(TokenContext);
+  const [setuserFocus] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,11 +24,10 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [setSuccess] = useState(false);
   const navigate = useNavigate()
   const userRef = useRef();
   const errRef = useRef();
-  const { slug } = useParams();
 
   const handleChange = (event) => {
     setIsChecked(event.target.checked);
@@ -60,20 +57,6 @@ export default function Register() {
     axios
       .post("http://91.107.207.100:81/api/accounts/register/", JSON.stringify(userData), config)
       .then((response) => {
-      //   console.log("Slug:", response.data.slug);
-      //   setSuccess(true);
-      //   setErrMsg("");
-      //   console.log(response.data.slug);
-      //   handleActivationSlug(response.data.slug);
-      //   if(response.data.slug) {
-      //     navigate(`/activation/${response.data.slug}`);
-      //   }
-      //   const { access, refresh } = response.data.tokens;
-      //   setAccessToken(access);
-      //   setRefreshToken(refresh);
-      //   setUserData(response.data);
-
-      // })
       console.log(response.data.slug);
       handleActivationSlug(response.data.slug); 
       setSuccess(true);
@@ -111,7 +94,6 @@ export default function Register() {
             </p>
             <form onSubmit={handleSubmit}>
               <p ref={errRef} className={errMsg ? RegCss.errmsg : RegCss.offscreen} aria-live="assertive">
-                {/* {errMsg} */}
               </p>
               <div className={RegCss.inputs}>
                 <TextField
@@ -131,10 +113,6 @@ export default function Register() {
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                 />
-                {/* <p id="uidnote" className={userFocus && user && !userRegex.test(firstName) ? RegCss.instruction : RegCss.offscreen}> */}
-                  {/* <i class="fa-solid fa-circle-info"></i> */}
-                  {/* Must begin with a letter <br /> 4 to 14 characters <br /> Letters, numbers, unedrscores, hypens allowed. */}
-                {/* </p> */}
                 <TextField
                   required
                   label="Your last name"

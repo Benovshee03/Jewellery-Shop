@@ -5,17 +5,12 @@ import Header from "../Header/Header";
 import { MyContext } from "../../App";
 import { useContext ,useState ,useEffect} from "react";
 
-import image from "../svg/5.png"
-
 export default function Cart() {
   const {product ,  cartItems, deleteFromCart , opacity} = useContext(MyContext);
   const [quantities, setQuantities] = useState(cartItems.map(() => 1));
 const [totalPrices, setTotalPrices] = useState(cartItems.map((item) => item.price));
 const [cartTotal, setCartTotal] = useState(0);
 
-  // const cartTotal = product.reduce((total, product) => {
-  //     return total + product.price * product.quantity;
-  //   }, 0);
   const handleRemoveFromCart = (productId) => {
     deleteFromCart(productId);
   };

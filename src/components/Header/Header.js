@@ -3,16 +3,14 @@ import { MyContext } from "../../App";
 import HeadCss from "../Header/Header.module.css";
 import { Link } from "react-router-dom";
 import Search from "../svg/search.svg";
-import Meliora from "../svg/Meliora.svg";
 import newMel from "../svg/new3.png"
 import Bag from "../svg/bag.svg";
 import Wishlist from "../svg/wishlist.svg";
 import times from "../svg/xmark-solid.svg";
-// import Menu from "../svg/menu.svg";
 import store from "../svg/store-solid.svg";
 export default function Header() {
   const { searchProducts ,handleFilter ,setOpacity,cartItemCount} = useContext(MyContext);
-  const { helperData ,searchText} = useContext(MyContext);
+  const { helperData } = useContext(MyContext);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   const setOpa = () => {

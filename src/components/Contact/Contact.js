@@ -1,5 +1,4 @@
 import React ,{useContext} from "react";
-import { Link } from "react-router-dom";
 import { MyContext } from "../../App";
 import ConCss from "../Contact/Contact.module.css";
 import Header from "../Header/Header";
@@ -14,7 +13,7 @@ export default function Contact() {
         <div className={ConCss.bottom}>
           <div className={ConCss.left}>
             <div className={ConCss.green} id={ConCss.second}>
-              <a
+              <a rel="noreferrer"
                 href="https://www.instagram.com/meliora_handmade/"
                 target="_blank"
                 className={ConCss.adviser}
@@ -33,7 +32,6 @@ export default function Contact() {
           </div>
           <div className={ConCss.right}>
             <div className={ConCss.map}>
-              {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12154.532348320125!2d49.84224319999999!3d40.3948239!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d4c56833499%3A0x9a2d50717850bb4a!2sUniverium!5e0!3m2!1sen!2saz!4v1681220658162!5m2!1sen!2saz"></iframe> */}
               <form >
       <div className={ConCss.namesur}>
         
@@ -43,7 +41,6 @@ export default function Contact() {
           type="text"
           id="name"
           name="name"
-          // value={formData.name}
           required
         />
         <input
@@ -52,7 +49,6 @@ export default function Contact() {
           type="text"
           id="name"
           name="surname"
-          // value={formData.name}
           required
         />
       </div> 
@@ -63,7 +59,6 @@ export default function Contact() {
           type="email"
           id="email"
           name="email"
-          // value={formData.email}
           required
         />
       </div>
@@ -72,13 +67,12 @@ export default function Contact() {
           id="message"
           name="message"
           placeholder="Mesajınız:"
-          // value={formData.message}
           required
         />
       </div>
       <button type="submit">Göndər</button>
     </form>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12154.532348320125!2d49.84224319999999!3d40.3948239!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d4c56833499%3A0x9a2d50717850bb4a!2sUniverium!5e0!3m2!1sen!2saz!4v1681220658162!5m2!1sen!2saz"></iframe>
+    <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12154.532348320125!2d49.84224319999999!3d40.3948239!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d4c56833499%3A0x9a2d50717850bb4a!2sUniverium!5e0!3m2!1sen!2saz!4v1681220658162!5m2!1sen!2saz"></iframe>
             </div>
           </div>
         </div>

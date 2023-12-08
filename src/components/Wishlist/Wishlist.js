@@ -16,7 +16,6 @@ export default function Wishlist() {
       <section className={WishCss.wish} style={{opacity}}>
         {wishlist.length === 0 ? (
           <div className={WishCss.empty}>
-            {/* <iframe src="https://embed.lottiefiles.com/animation/67159"></iframe> */}
             <img src={wish} alt="empty wishlist" />
             <p> Məhsul əlavə edilməmişdir</p>
           </div>
@@ -46,7 +45,7 @@ export default function Wishlist() {
                   <td>
                     <img
                       src="https://cdn.shopify.com/s/files/1/2278/7513/products/SBN171-A_1350x1800.jpg?v=1677272649"
-                      alt="image"
+                      alt="shopify"
                       width="100px"
                       height="120px"
                     />
