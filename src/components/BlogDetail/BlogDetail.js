@@ -15,9 +15,9 @@ export default function BlogDetail() {
   const { blog } = useContext(MyContext);
   const [data, setData] = useState(null);
 
-  useEffect(() => {
-    setData(blog.filter((prod) => prod.id === Number(blogId)));
-  }, [blogId]);
+  // useEffect(() => {
+  //   setData(blog.filter((prod) => prod.id === Number(blogId)));
+  // }, [blogId]);
 
   return (
     <>

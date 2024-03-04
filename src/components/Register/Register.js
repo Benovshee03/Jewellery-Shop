@@ -14,8 +14,8 @@ import { useNavigate } from "react-router-dom";
 const userRegex = /^[A-Za-z]\w{4,14}$/;
 
 export default function Register() {
-  const { opacity} = useContext(MyContext);
-  const { handleActivationSlug} = useContext(TokenContext);
+  const { opacity } = useContext(MyContext);
+  const { handleActivationSlug } = useContext(TokenContext);
   const [setuserFocus] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -25,7 +25,7 @@ export default function Register() {
   const [isChecked, setIsChecked] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [setSuccess] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const userRef = useRef();
   const errRef = useRef();
 
@@ -36,7 +36,14 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !email || !password || !confirmPassword || !isChecked) {
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !isChecked
+    ) {
       setErrMsg("Zəhmət olmasa, bütün sahələri düzgün doldurun.");
       return;
     }
@@ -55,25 +62,33 @@ export default function Register() {
 
     const config = { headers: { "Content-Type": "application/json" } };
     axios
-      .post("http://91.107.207.100:81/api/accounts/register/", JSON.stringify(userData), config)
+      .post(
+        "http://91.107.207.100:81/api/accounts/register/",
+        JSON.stringify(userData),
+        config
+      )
       .then((response) => {
-      console.log(response.data.slug);
-      handleActivationSlug(response.data.slug); 
-      setSuccess(true);
-      setErrMsg("");
-      navigate(`/activate/${response.data.slug}/`); 
+        console.log(response.data.slug);
+        handleActivationSlug(response.data.slug);
+        setSuccess(true);
+        setErrMsg("");
+        navigate(`/activate/${response.data.slug}/`);
       })
       .catch((error) => {
-    if (error.response && error.response.data && error.response.data.message) {
-      setErrMsg(error.response.data.message);
-    } else {
-      setErrMsg("Qeydiyyatda səhv baş verdi. Zəhmət olmasa, yenidən cəhd edin.");
-    }
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          setErrMsg(error.response.data.message);
+        } else {
+          setErrMsg(
+            "Qeydiyyatda səhv baş verdi. Zəhmət olmasa, yenidən cəhd edin."
+          );
+        }
       });
 
-
-      
-      console.log(userData)
+    console.log(userData);
     console.log("First Name:", firstName);
     console.log("Last Name:", lastName);
     console.log("Email:", email);
@@ -93,8 +108,11 @@ export default function Register() {
               Thanks for signing up! We're happy to have you.
             </p>
             <form onSubmit={handleSubmit}>
-              <p ref={errRef} className={errMsg ? RegCss.errmsg : RegCss.offscreen} aria-live="assertive">
-              </p>
+              <p
+                ref={errRef}
+                className={errMsg ? RegCss.errmsg : RegCss.offscreen}
+                aria-live="assertive"
+              ></p>
               <div className={RegCss.inputs}>
                 <TextField
                   required
@@ -159,14 +177,14 @@ export default function Register() {
                   sx={{ mt: 1, mr: 1, color: "#133f3e" }}
                 />
                 <label htmlFor="condition">
-                  Sign up to receive Meliora emails. <Link to="/about">Terms and Conditions</Link>
+                  Sign up to receive Meliora emails.{" "}
+                  <Link to="/about">Terms and Conditions</Link>
                 </label>
               </div>
-              <Button sx={{ mt: 3, mr: 3 }} type="submit" variant="outlined" >
+              <Button sx={{ mt: 3, mr: 3 }} type="submit" variant="outlined">
                 Create an Account
               </Button>
             </form>
-
           </div>
           <div className={RegCss.regImage}>
             <img src={image} alt="" />

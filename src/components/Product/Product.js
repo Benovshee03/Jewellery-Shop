@@ -14,7 +14,7 @@ import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 export default function Product() {
   const { product } = useContext(MyContext);
-  const { wishlist, deleteFromWishlist , addToWishlist ,opacity ,handleCloseAlert, isAlertOpen, handleAddToCart , handleClosePopUp,isPopUpVisible ,setPopUpVisible} = useContext(MyContext);
+  const { wishlist, deleteFromWishlist , addToWishlist ,opacity ,handleCloseAlert, isAlertOpen, handleAddToCart ,isPopUpVisible } = useContext(MyContext);
   const [hovered, setHovered] = useState(false);
   const [isOpen, setIsOpen] = useState({
     showFilters: true,
@@ -26,7 +26,7 @@ export default function Product() {
     sizeFilter: true,
     promoFilter: true,
   });
-  const [images, setImages] = useState([]);
+  const [ setImages] = useState([]);
   const fetchedImages = product;
   const [filteredProducts, setFilteredProducts] = useState(product); 
   const [selectedFilters, setSelectedFilters] = useState({
@@ -63,9 +63,9 @@ export default function Product() {
       [filter]: !prevState[filter],
     }));
   };
-  useEffect(() => {
-    applyFilters();
-  }, [selectedFilters, product]); 
+  // useEffect(() => {
+  //   applyFilters();
+  // }, [selectedFilters, product]); 
 
   const applyFilters = () => {
     let filteredData = product.slice(); 
@@ -165,9 +165,9 @@ export default function Product() {
   };
 
   // Call the sortProducts function whenever the sort option changes or the filtered products change
-  useEffect(() => {
-    sortProducts();
-  }, [sortOption]);
+  // useEffect(() => {
+  //   sortProducts();
+  // }, [sortOption]);
   
   
   // console.log(filteredProducts);

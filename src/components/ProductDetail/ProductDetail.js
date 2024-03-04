@@ -5,7 +5,6 @@ import { MyContext } from "../../App";
 import Header from "../Header/Header";
 import { Link } from "react-router-dom";
 import DetCss from ".//ProductDetail.module.css";
-import Footer from "../Footer/Footer";
 import StarRating from "../StarRating";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -38,9 +37,9 @@ export default function ProductDetail() {
   const [data, setData] = useState(null);
   const [mainImage, setMainImage] = useState(null);
 
-  useEffect(() => {
-    setData(product.filter((prod) => prod.id === Number(productId)));
-  }, []);
+  // useEffect(() => {
+  //   setData(product.filter((prod) => prod.id === Number(productId)));
+  // }, []);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [review, setReview] = useState("");
@@ -88,7 +87,7 @@ export default function ProductDetail() {
                     <div className={DetCss.picture__main}>
                       <img
                         src={"http://91.107.207.100:81" + (mainImage || e.images[0].image_url)}
-                        alt="picture"
+                        alt="main"
                       />
                     </div>
                   </div>
